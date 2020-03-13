@@ -1,5 +1,0 @@
-D:/Gamedev/glpl/cmake-build-debug/CMakeFiles/glad.lib.dir
-D:/Gamedev/glpl/cmake-build-debug/CMakeFiles/stb_image.lib.dir
-D:/Gamedev/glpl/cmake-build-debug/CMakeFiles/glpl.dir
-D:/Gamedev/glpl/cmake-build-debug/CMakeFiles/edit_cache.dir
-D:/Gamedev/glpl/cmake-build-debug/CMakeFiles/rebuild_cache.dir

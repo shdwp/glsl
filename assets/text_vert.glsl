@@ -1,15 +1,14 @@
 #version 430
 
 layout (location = 0) in vec2 pos;
-layout (location = 1) in float ord;
-layout (location = 1) in float corn;
+layout (location = 1) in vec2 texPos;
 
-out float Ord;
-out float Corn;
+out vec2 TexPos;
+
+uniform mat4 trans;
 
 void main() {
-    gl_Position = vec4(pos, 0.f, 1.f);
+    gl_Position = trans * vec4(pos, 0, 1.f);
 
-    Ord = ord;
-    Corn = corn;
+    TexPos = texPos;
 }

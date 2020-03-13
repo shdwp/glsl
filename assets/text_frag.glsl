@@ -1,9 +1,11 @@
 #version 430
 
-in float Ord;
-in float Corn;
+in vec2 TexPos;
+
 out vec4 Color;
 
+uniform sampler2D tex;
+
 void main() {
-    Color = vec4(1.f, 1.f, 1.f, 1.f);
+    Color = texture(tex, TexPos);
 }

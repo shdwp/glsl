@@ -6,21 +6,23 @@
 #define GLPL_TEXTOBJECT_H
 
 #include "../gl_misc.h"
-#include "../Texture2D.h"
-#include "../ShaderProgram.h"
-#include "../VertexBufferObject.h"
+#include "../gl/Texture2D.h"
+#include "../gl/ShaderProgram.h"
+#include "../gl/VertexBufferObject.h"
 
 #include <glm/glm.hpp>
 
 class TextObject {
-    VertexBufferObject *m_vb;
-    ShaderProgram *m_shader;
-    std::string m_str;
+    unique_ptr<VertexBufferObject> m_vb;
+    unique_ptr<ShaderProgram> m_shader;
+    shared_ptr<Texture2D> m_tex;
 
 public:
-    TextObject(Texture2D *tex, std::string *str);
+    glm::mat4 proj = glm::mat4(1.f);
 
-    void render(glm::mat4 trans);
+    TextObject(shared_ptr<Texture2D> tex, string str, float size = 24.f);
+
+    void render();
 };
 
 #endif //GLPL_TEXTOBJECT_H
