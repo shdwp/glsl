@@ -6,7 +6,7 @@
 #include "Texture2D.h"
 #include "stb_image/stb_image.h"
 
-Texture2D::Texture2D(std::string path) {
+Texture2D::Texture2D(string path, GLenum filter) {
     int w, h, ch;
 
     stbi_set_flip_vertically_on_load(true);
@@ -18,15 +18,16 @@ Texture2D::Texture2D(std::string path) {
 
     auto type = ch == 4 ? GL_RGBA : GL_RGB;
 
-    glGenTextures(1, &Id);
-    glBindTexture(GL_TEXTURE_2D, Id);
+    glGenTextures(1, &id_);
+    glBindTexture(GL_TEXTURE_2D, id_);
     glTexImage2D(GL_TEXTURE_2D, 0, type, w, h, 0, type, GL_UNSIGNED_BYTE, data);
     glGenerateMipmap(GL_TEXTURE_2D);
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
-    this->filter(GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, filter);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, filter);
 
     stbi_image_free(data);
 }

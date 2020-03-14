@@ -13,8 +13,9 @@
 #include "glmisc/scene/Camera.h"
 #include "glmisc/text/TextObject.h"
 #include "glmisc/gen/Primitives.h"
-#include "glmisc/entities/Shape.h"
-#include "glmisc/entities/TexturedShape.h"
+#include "glmisc/objects/GObject.h"
+#include "glmisc/objects/Light.h"
+#include "glmisc/scene/Scene.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -28,40 +29,50 @@ int main() {
 
     glmisc_debug_setup();
 
+    // cam
     auto camera = make_unique<Camera>(
             glm::perspective(glm::radians(80.f), 1600.f / 1200.f, 0.1f, 100.f),
             glm::vec3(0, 1, 0),
             glm::vec3(0, 0, -1)
-            );
+    );
 
-    auto fontTexture = make_shared<Texture2D>(string("../assets/font.png"));
-    auto labelText = make_unique<TextObject>(fontTexture, string("$ label test"));
+    // label
+    auto fontTexture = make_shared<Texture2D>("../assets/font.png");
+    auto labelText = make_unique<TextObject>(fontTexture, "$ label test");
 
-    auto cubeTexture = make_shared<Texture2D>(std::string("../assets/b.png"));
+    // scene
+    auto scene = make_unique<Scene>();
 
+    // cubes
     size_t cubeDataSize;
     auto cubeData = Primitives::Cube(&cubeDataSize);
+    auto cubeMat = make_shared<Material>(Material::Base(make_shared<Texture2D>("../assets/a_diff.png")));
+    cubeMat->tex_spec_ = make_shared<Texture2D>("../assets/a_spec.png");
+    cubeMat->tex_emission_ = make_shared<Texture2D>("../assets/a_emission.png");
 
+    auto cube1 = scene->addChild(GObject(cubeMat, cubeData.get(), cubeDataSize));
+    cube1->position_ = glm::vec3(-0.5, 0.5, -3);
+    auto cube2 = scene->addChild(GObject(cubeMat, cubeData.get(), cubeDataSize));
+    cube2->position_ = glm::vec3(1, 0.5, -5);
+    auto cube3 = scene->addChild(GObject(cubeMat, cubeData.get(), cubeDataSize));
+    cube3->position_ = glm::vec3(-2, 0.5, -5);
+
+    // plane
     size_t planeDataSize;
     auto planeData = Primitives::Plane(&planeDataSize);
+    auto plane = scene->addChild(GObject(
+            make_shared<Material>(Material::Base(make_shared<Texture2D>("../assets/grass.jpg", GL_LINEAR))),
+            planeData.get(),
+            planeDataSize
+    ));
+    plane->scale_ = glm::vec3(100, 1, 100);
 
-    auto cube1 = make_unique<TexturedShape>(cubeTexture, cubeData.get(), cubeDataSize);
-    cube1->position = glm::vec3(-1, 1, -2);
-
-    auto cube2 = make_unique<TexturedShape>(cubeTexture, cubeData.get(), cubeDataSize);
-    cube2->position = glm::vec3(1, 0.5, -5);
-
-    auto plane = make_unique<Shape>(planeData.get(), planeDataSize);
-    plane->scale = glm::vec3(100, 0, 100);
-    plane->albedo = glm::vec4(0, 0.3, 0, 1);
-
-    auto lightShape = make_shared<Shape>(cubeData.get(), cubeDataSize);
-    lightShape->albedo = glm::vec4(1);
-    lightShape->position = glm::vec3(1, 1, -1);
-    lightShape->scale = glm::vec3(0.05);
-    lightShape->emission = 1;
-
-    auto ambientColor = glm::vec3(0.2, 0.2, 0.2);
+    // light
+    auto light = scene->addChild(Spotlight(make_shared<Material>(Material::Light()), cubeData.get(), cubeDataSize));
+    light->position_ = glm::vec3(1, 1, -1);
+    light->scale_ = glm::vec3(0.05);
+    light->ambient_ = glm::vec3(0.15f);
+    scene->direction_light_ = light;
 
     // setup
     glViewport(0, 0, 1600, 1200);
@@ -70,7 +81,7 @@ int main() {
     auto guiProj = glm::mat4(1.f);
     guiProj = glm::scale(guiProj, glm::vec3(2.f / 1600, 2.f / 1200, 1));
     guiProj = glm::translate(guiProj, glm::vec3(-1600 / 2, -1200 / 2, 0));
-    labelText->proj = guiProj;
+    labelText->proj_ = guiProj;
 
     // render loop
     double lastFrameTimestamp = glfwGetTime();
@@ -84,16 +95,20 @@ int main() {
         }
 
         auto speed = 1.f;
-        glm::vec3 *pos = &(camera->position);
         if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT)) {
-            pos = &(lightShape->position);
+            speed *= 4.f;
         }
 
-        if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS) {
-            pos->z -= speed * deltaTime;
+        glm::vec3 *pos = &(camera->position_);
+        if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL)) {
+            pos = &(light->position_);
         }
+
         if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS) {
-            pos->z += speed * deltaTime;
+            pos->y -= speed * deltaTime;
+        }
+        if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS) {
+            pos->y += speed * deltaTime;
         }
         if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
             pos->x -= speed * deltaTime;
@@ -101,11 +116,11 @@ int main() {
         if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
             pos->x += speed * deltaTime;
         }
-        if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
-            pos->y += speed * deltaTime;
-        }
         if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
-            pos->y -= speed * deltaTime;
+            pos->z += speed * deltaTime;
+        }
+        if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
+            pos->z -= speed * deltaTime;
         }
 
         glClearColor(0.1f, 0.1f, 0.1f, 1.f);
@@ -113,29 +128,7 @@ int main() {
 
         {
             glEnable(GL_DEPTH_TEST);
-
-            // render plane
-            plane->ambientLight = ambientColor;
-            plane->prepare_for(camera.get());
-            plane->affected_by(lightShape.get());
-            plane->render();
-
-            // render cube 1
-            cube1->ambientLight = ambientColor;
-            cube1->prepare_for(camera.get());
-            cube1->affected_by(lightShape.get());
-            cube1->render();
-
-            // render cube 2
-            cube2->ambientLight = ambientColor;
-            cube2->prepare_for(camera.get());
-            cube1->affected_by(lightShape.get());
-            cube2->render();
-
-             // render light
-             lightShape->prepare_for(camera.get());
-             lightShape->render();
-
+            scene->draw(*camera);
             glDisable(GL_DEPTH_TEST);
         }
 

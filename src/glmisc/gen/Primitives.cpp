@@ -47,12 +47,12 @@ float CUBE_BASE[] = {
 
 float PLANE_BASE[] = {
         -0.5f, 0.f, 0.5f,   0.f, 1.f,   0.f, 1.f, 0.f,
-        0.5f, 0.0f, 0.5f,   0.f, 1.f,   0.f, 1.f, 0.f,
-        -0.5f, 0.f, -0.5f,  0.f, 1.f,   0.f, 1.f, 0.f,
+        0.5f, 0.0f, 0.5f,   1.f, 1.f,   0.f, 1.f, 0.f,
+        -0.5f, 0.f, -0.5f,  0.f, 0.f,   0.f, 1.f, 0.f,
 
-        0.5f, 0.f, 0.5f,    0.f, 1.f,   0.f, 1.f, 0.f,
-        -0.5f, 0.f, -0.5f,  0.f, 1.f,   0.f, 1.f, 0.f,
-        0.5f, 0.f, -0.5f,   0.f, 1.f,   0.f, 1.f, 0.f,
+        0.5f, 0.f, 0.5f,    1.f, 1.f,   0.f, 1.f, 0.f,
+        -0.5f, 0.f, -0.5f,  0.f, 0.f,   0.f, 1.f, 0.f,
+        0.5f, 0.f, -0.5f,   1.f, 0.f,   0.f, 1.f, 0.f,
 };
 
 unique_ptr<float[]> Primitives::Cube(size_t *size) {

@@ -9,15 +9,15 @@
 
 class VertexBufferObject {
 public:
-    vertex_array_object_t Id = 0;
+    vertex_array_object_t id_ = 0;
 
     VertexBufferObject(float *data, size_t size);
 
-    void set_indices(size_t _count);
+    void setIndices(size_t _count);
 
-    void set_indices(size_t _count, unsigned int *data, size_t size);
+    void setIndices(size_t _count, unsigned int *data, size_t size);
 
-    void push_attrib_pointer(
+    void pushAttributePointer(
             unsigned int n,
             GLenum gl_type,
             size_t stride,
@@ -25,7 +25,7 @@ public:
             );
 
     void bind() {
-        glBindVertexArray(Id);
+        glBindVertexArray(id_);
     }
 
     void draw(GLenum mode = GL_TRIANGLES) {
@@ -44,7 +44,7 @@ public:
         }
     }
 
-    void bind_and_draw(GLenum mode = GL_TRIANGLES) {
+    void bindAndDraw(GLenum mode = GL_TRIANGLES) {
         this->bind();
         this->draw(mode);
     }

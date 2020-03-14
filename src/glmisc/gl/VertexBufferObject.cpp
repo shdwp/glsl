@@ -5,19 +5,19 @@
 #include "VertexBufferObject.h"
 
 VertexBufferObject::VertexBufferObject(float *data, size_t size) {
-    glGenVertexArrays(1, &Id);
-    glBindVertexArray(Id);
+    glGenVertexArrays(1, &id_);
+    glBindVertexArray(id_);
 
     glGenBuffers(1, &VBO);
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW);
 }
 
-void VertexBufferObject::set_indices(size_t _count) {
+void VertexBufferObject::setIndices(size_t _count) {
     count = _count;
 }
 
-void VertexBufferObject::set_indices(size_t _count, uint32_t *data, size_t size) {
+void VertexBufferObject::setIndices(size_t _count, uint32_t *data, size_t size) {
     glGenBuffers(1, &EBO);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, data, GL_STATIC_DRAW);
@@ -25,7 +25,7 @@ void VertexBufferObject::set_indices(size_t _count, uint32_t *data, size_t size)
     count = _count;
 }
 
-void VertexBufferObject::push_attrib_pointer(unsigned int n, GLenum gl_type, size_t stride, size_t offset) {
+void VertexBufferObject::pushAttributePointer(unsigned int n, GLenum gl_type, size_t stride, size_t offset) {
     glVertexAttribPointer(attrib_idx, n, gl_type, GL_FALSE, stride, (void *)offset);
     glEnableVertexAttribArray(attrib_idx);
 

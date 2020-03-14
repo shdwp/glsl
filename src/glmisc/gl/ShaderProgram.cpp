@@ -40,8 +40,8 @@ shader_argument_t shader_argument(shader_argument_type type, std::string path) {
     return value;
 }
 
-ShaderProgram::ShaderProgram(std::vector<shader_argument_t> shaders) {
-    Id = glCreateProgram();
+ShaderProgram::ShaderProgram(vector<shader_argument_t> shaders) {
+    id_ = glCreateProgram();
 
     for (shader_argument_t arg: shaders) {
         shader_object_t shader = 0;
@@ -56,38 +56,38 @@ ShaderProgram::ShaderProgram(std::vector<shader_argument_t> shaders) {
         }
 
         if (shader != 0) {
-            glAttachShader(Id, shader);
+            glAttachShader(id_, shader);
         } else {
             std::cout << "failed to load shader" << std::endl;
         }
     }
 
-    glLinkProgram(Id);
+    glLinkProgram(id_);
 
-    int result; glGetProgramiv(Id, GL_LINK_STATUS, &result);
+    int result; glGetProgramiv(id_, GL_LINK_STATUS, &result);
     if (!result) {
         char infoLog[512];
-        glGetProgramInfoLog(Id, 512, nullptr, infoLog);
+        glGetProgramInfoLog(id_, 512, nullptr, infoLog);
         std::cout << "Failed to link program:\n" << infoLog << std::endl;
     }
 }
 
 void ShaderProgram::uniform(const char *name, float a) {
-    glUniform1f(glGetUniformLocation(Id, name), a);
+    glUniform1f(glGetUniformLocation(id_, name), a);
 }
 
 void ShaderProgram::uniform(const char *name, int a) {
-    glUniform1i(glGetUniformLocation(Id, name), a);
+    glUniform1i(glGetUniformLocation(id_, name), a);
 }
 
 void ShaderProgram::uniform(const char *name, glm::vec3 vec) {
-    glUniform3f(glGetUniformLocation(Id, name), vec.x, vec.y, vec.z);
+    glUniform3f(glGetUniformLocation(id_, name), vec.x, vec.y, vec.z);
 }
 
 void ShaderProgram::uniform(const char *name, glm::vec4 vec) {
-    glUniform4f(glGetUniformLocation(Id, name), vec.x, vec.y, vec.z, vec.w);
+    glUniform4f(glGetUniformLocation(id_, name), vec.x, vec.y, vec.z, vec.w);
 }
 
 void ShaderProgram::uniform(const char *name, glm::mat4 mat) {
-    glUniformMatrix4fv(glGetUniformLocation(Id, name), 1, GL_FALSE, glm::value_ptr(mat));
+    glUniformMatrix4fv(glGetUniformLocation(id_, name), 1, GL_FALSE, glm::value_ptr(mat));
 }

@@ -6,7 +6,7 @@
 #include <iostream>
 #include "TextObject.h"
 
-TextObject::TextObject(shared_ptr<Texture2D> tex, string str, float size) {
+TextObject::TextObject(const shared_ptr<Texture2D> &tex, string str, float size) {
     auto data_el_count = 4;
     auto data_stride = 4 * data_el_count;
     auto data_size = str.length() * sizeof(float) * data_stride;
@@ -61,27 +61,27 @@ TextObject::TextObject(shared_ptr<Texture2D> tex, string str, float size) {
     }
      */
 
-    m_vb = make_unique<VertexBufferObject>(data, data_size);
-    m_vb->set_indices(indices_size / sizeof(uint32_t), indices, indices_size);
-    m_vb->push_attrib_pointer(2, GL_FLOAT, sizeof(float) * data_el_count, 0);
-    m_vb->push_attrib_pointer(2, GL_FLOAT, sizeof(float) * data_el_count, sizeof(float) * 2);
+    vb_ = make_unique<VertexBufferObject>(data, data_size);
+    vb_->setIndices(indices_size / sizeof(uint32_t), indices, indices_size);
+    vb_->pushAttributePointer(2, GL_FLOAT, sizeof(float) * data_el_count, 0);
+    vb_->pushAttributePointer(2, GL_FLOAT, sizeof(float) * data_el_count, sizeof(float) * 2);
 
-    m_shader = make_unique<ShaderProgram>((vector<shader_argument_t>){
+    shader_ = make_unique<ShaderProgram>((vector<shader_argument_t>){
         shader_argument(ShaderType_Vertex, "../assets/text_vert.glsl"),
         shader_argument(ShaderType_Fragment, "../assets/text_frag.glsl")
     });
 
-    m_tex = tex;
+    tex_ = tex;
 
     free(data);
     free(indices);
 }
 
 void TextObject::render() {
-    m_tex->bind();
+    tex_->bind();
 
-    m_shader->use();
-    m_shader->uniform("trans", proj);
+    shader_->use();
+    shader_->uniform("trans", proj_);
 
-    m_vb->bind_and_draw(GL_TRIANGLES);
+    vb_->bindAndDraw(GL_TRIANGLES);
 }

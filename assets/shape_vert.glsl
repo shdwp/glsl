@@ -10,9 +10,11 @@ out vec3 FragPos;
 uniform mat4 proj, world, local;
 
 void main() {
-    gl_Position = proj * world * local * vec4(aPos, 1);
+    vec4 local_Position = local * vec4(aPos, 1);
+    gl_Position = proj * world * local_Position;
 
+    // TextureCoord = (local * vec4(aTexCoord.xy, 1, 1)).xy;
     TextureCoord = aTexCoord;
     Normal = mat3(transpose(inverse(local))) * aNorm;
-    FragPos = (local * vec4(aPos, 1)).xyz;
+    FragPos = local_Position.xyz;
 }

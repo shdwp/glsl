@@ -240,7 +240,7 @@ RECENT REVISION HISTORY:
 // stb_image supports loading HDR images in general, and currently the Radiance
 // .HDR file format specifically. You can still load any file through the existing
 // interface; if you attempt to load an HDR file, it will be automatically remapped
-// to LDR, assuming gamma 2.2 and an arbitrary scale factor defaulting to 1;
+// to LDR, assuming gamma 2.2 and an arbitrary scale_ factor defaulting to 1;
 // both of these constants can be reconfigured through this interface:
 //
 //     stbi_hdr_to_ldr_gamma(2.2f);
@@ -1444,12 +1444,12 @@ STBIDEF int      stbi_is_hdr          (char const *filename)
 STBIDEF int stbi_is_hdr_from_file(FILE *f)
 {
    #ifndef STBI_NO_HDR
-   long position = ftell(f);
+   long position_ = ftell(f);
    int res;
    stbi__context s;
    stbi__start_file(&s,f);
    res = stbi__hdr_test(&s);
-   fseek(f, position, SEEK_SET);
+   fseek(f, position_, SEEK_SET);
    return res;
    #else
    STBI_NOTUSED(f);
@@ -1475,13 +1475,13 @@ STBIDEF int      stbi_is_hdr_from_callbacks(stbi_io_callbacks const *clbk, void 
 static float stbi__l2h_gamma=2.2f, stbi__l2h_scale=1.0f;
 
 STBIDEF void   stbi_ldr_to_hdr_gamma(float gamma) { stbi__l2h_gamma = gamma; }
-STBIDEF void   stbi_ldr_to_hdr_scale(float scale) { stbi__l2h_scale = scale; }
+STBIDEF void   stbi_ldr_to_hdr_scale(float scale_) { stbi__l2h_scale = scale_; }
 #endif
 
 static float stbi__h2l_gamma_i=1.0f/2.2f, stbi__h2l_scale_i=1.0f;
 
 STBIDEF void   stbi_hdr_to_ldr_gamma(float gamma) { stbi__h2l_gamma_i = 1/gamma; }
-STBIDEF void   stbi_hdr_to_ldr_scale(float scale) { stbi__h2l_scale_i = 1/scale; }
+STBIDEF void   stbi_hdr_to_ldr_scale(float scale_) { stbi__h2l_scale_i = 1/scale_; }
 
 
 //////////////////////////////////////////////////////////////////////////////
@@ -1861,7 +1861,7 @@ typedef struct
 // definition of jpeg image component
    struct
    {
-      int id;
+      int id_;
       int h,v;
       int tq;
       int hd,ha;
@@ -1913,7 +1913,7 @@ static int stbi__build_huffman(stbi__huffman *h, int *count)
    code = 0;
    k = 0;
    for(j=1; j <= 16; ++j) {
-      // compute delta to add to code to compute symbol id
+      // compute delta to add to code to compute symbol id_
       h->delta[j] = k - code;
       if (h->size[k] == j) {
          while (h->size[k] == j)
@@ -2029,11 +2029,11 @@ stbi_inline static int stbi__jpeg_huff_decode(stbi__jpeg *j, stbi__huffman *h)
    if (k > j->code_bits)
       return -1;
 
-   // convert the huffman code to the symbol id
+   // convert the huffman code to the symbol id_
    c = ((j->code_buffer >> (32 - k)) & stbi__bmask[k]) + h->delta[k];
    STBI_ASSERT((((j->code_buffer) >> (32 - h->size[c])) & stbi__bmask[h->size[c]]) == h->code[c]);
 
-   // convert the id to a symbol
+   // convert the id_ to a symbol
    j->code_bits -= k;
    j->code_buffer <<= k;
    return h->values[c];
@@ -2081,7 +2081,7 @@ stbi_inline static int stbi__jpeg_get_bit(stbi__jpeg *j)
    return k & 0x80000000;
 }
 
-// given a value that's at position X in the zigzag stream,
+// given a value that's at position_ X in the zigzag stream,
 // where does it appear in the 8x8 matrix coded as row-major?
 static const stbi_uc stbi__jpeg_dezigzag[64+15] =
 {
@@ -2386,7 +2386,7 @@ static void stbi__idct_block(stbi_uc *out, int out_stride, short data[64])
       // no fast case since the first 1D IDCT spread components out
       STBI__IDCT_1D(v[0],v[1],v[2],v[3],v[4],v[5],v[6],v[7])
       // constants scaled things up by 1<<12, plus we had 1<<2 from first
-      // loop, plus horizontal and vertical each scale by sqrt(8) so together
+      // loop, plus horizontal and vertical each scale_ by sqrt(8) so together
       // we've got an extra 1<<3, so 1<<17 total we need to remove.
       // so we want to round that, which means adding 0.5 * 1<<17,
       // aka 65536. Also, we'll end up with -128 to 127 that we want
@@ -3092,10 +3092,10 @@ static int stbi__process_scan_header(stbi__jpeg *z)
    if (z->scan_n < 1 || z->scan_n > 4 || z->scan_n > (int) z->s->img_n) return stbi__err("bad SOS component count","Corrupt JPEG");
    if (Ls != 6+2*z->scan_n) return stbi__err("bad SOS len","Corrupt JPEG");
    for (i=0; i < z->scan_n; ++i) {
-      int id = stbi__get8(z->s), which;
+      int id_ = stbi__get8(z->s), which;
       int q = stbi__get8(z->s);
       for (which = 0; which < z->s->img_n; ++which)
-         if (z->img_comp[which].id == id)
+         if (z->img_comp[which].id_ == id_)
             break;
       if (which == z->s->img_n) return 0; // no match
       z->img_comp[which].hd = q >> 4;   if (z->img_comp[which].hd > 3) return stbi__err("bad DC huff","Corrupt JPEG");
@@ -3166,8 +3166,8 @@ static int stbi__process_frame_header(stbi__jpeg *z, int scan)
    z->rgb = 0;
    for (i=0; i < s->img_n; ++i) {
       static const unsigned char rgb[3] = { 'R', 'G', 'B' };
-      z->img_comp[i].id = stbi__get8(s);
-      if (s->img_n == 3 && z->img_comp[i].id == rgb[i])
+      z->img_comp[i].id_ = stbi__get8(s);
+      if (s->img_n == 3 && z->img_comp[i].id_ == rgb[i])
          ++z->rgb;
       q = stbi__get8(s);
       z->img_comp[i].h = (q >> 4);  if (!z->img_comp[i].h || z->img_comp[i].h > 4) return stbi__err("bad H","Corrupt JPEG");
@@ -4608,7 +4608,7 @@ static int stbi__create_png_image_raw(stbi__png *a, stbi_uc *raw, stbi__uint32 r
          stbi_uc *in  = a->out + stride*j + x*out_n - img_width_bytes;
          // unpack 1/2/4-bit into a 8-bit buffer. allows us to keep the common 8-bit path optimal at minimal cost for 1/2/4-bit
          // png guarante byte alignment, if width is not multiple of 8/4/2 we'll decode dummy trailing data that will be skipped in the later loop
-         stbi_uc scale = (color == 0) ? stbi__depth_scale_table[depth] : 1; // scale grayscale values to 0..255 range
+         stbi_uc scale_ = (color == 0) ? stbi__depth_scale_table[depth] : 1; // scale_ grayscale values to 0..255 range
 
          // note that the final byte might overshoot and write more data than desired.
          // we can allocate enough data that this never writes out of memory, but it
@@ -4618,38 +4618,38 @@ static int stbi__create_png_image_raw(stbi__png *a, stbi_uc *raw, stbi__uint32 r
 
          if (depth == 4) {
             for (k=x*img_n; k >= 2; k-=2, ++in) {
-               *cur++ = scale * ((*in >> 4)       );
-               *cur++ = scale * ((*in     ) & 0x0f);
+               *cur++ = scale_ * ((*in >> 4)       );
+               *cur++ = scale_ * ((*in     ) & 0x0f);
             }
-            if (k > 0) *cur++ = scale * ((*in >> 4)       );
+            if (k > 0) *cur++ = scale_ * ((*in >> 4)       );
          } else if (depth == 2) {
             for (k=x*img_n; k >= 4; k-=4, ++in) {
-               *cur++ = scale * ((*in >> 6)       );
-               *cur++ = scale * ((*in >> 4) & 0x03);
-               *cur++ = scale * ((*in >> 2) & 0x03);
-               *cur++ = scale * ((*in     ) & 0x03);
+               *cur++ = scale_ * ((*in >> 6)       );
+               *cur++ = scale_ * ((*in >> 4) & 0x03);
+               *cur++ = scale_ * ((*in >> 2) & 0x03);
+               *cur++ = scale_ * ((*in     ) & 0x03);
             }
-            if (k > 0) *cur++ = scale * ((*in >> 6)       );
-            if (k > 1) *cur++ = scale * ((*in >> 4) & 0x03);
-            if (k > 2) *cur++ = scale * ((*in >> 2) & 0x03);
+            if (k > 0) *cur++ = scale_ * ((*in >> 6)       );
+            if (k > 1) *cur++ = scale_ * ((*in >> 4) & 0x03);
+            if (k > 2) *cur++ = scale_ * ((*in >> 2) & 0x03);
          } else if (depth == 1) {
             for (k=x*img_n; k >= 8; k-=8, ++in) {
-               *cur++ = scale * ((*in >> 7)       );
-               *cur++ = scale * ((*in >> 6) & 0x01);
-               *cur++ = scale * ((*in >> 5) & 0x01);
-               *cur++ = scale * ((*in >> 4) & 0x01);
-               *cur++ = scale * ((*in >> 3) & 0x01);
-               *cur++ = scale * ((*in >> 2) & 0x01);
-               *cur++ = scale * ((*in >> 1) & 0x01);
-               *cur++ = scale * ((*in     ) & 0x01);
+               *cur++ = scale_ * ((*in >> 7)       );
+               *cur++ = scale_ * ((*in >> 6) & 0x01);
+               *cur++ = scale_ * ((*in >> 5) & 0x01);
+               *cur++ = scale_ * ((*in >> 4) & 0x01);
+               *cur++ = scale_ * ((*in >> 3) & 0x01);
+               *cur++ = scale_ * ((*in >> 2) & 0x01);
+               *cur++ = scale_ * ((*in >> 1) & 0x01);
+               *cur++ = scale_ * ((*in     ) & 0x01);
             }
-            if (k > 0) *cur++ = scale * ((*in >> 7)       );
-            if (k > 1) *cur++ = scale * ((*in >> 6) & 0x01);
-            if (k > 2) *cur++ = scale * ((*in >> 5) & 0x01);
-            if (k > 3) *cur++ = scale * ((*in >> 4) & 0x01);
-            if (k > 4) *cur++ = scale * ((*in >> 3) & 0x01);
-            if (k > 5) *cur++ = scale * ((*in >> 2) & 0x01);
-            if (k > 6) *cur++ = scale * ((*in >> 1) & 0x01);
+            if (k > 0) *cur++ = scale_ * ((*in >> 7)       );
+            if (k > 1) *cur++ = scale_ * ((*in >> 6) & 0x01);
+            if (k > 2) *cur++ = scale_ * ((*in >> 5) & 0x01);
+            if (k > 3) *cur++ = scale_ * ((*in >> 4) & 0x01);
+            if (k > 4) *cur++ = scale_ * ((*in >> 3) & 0x01);
+            if (k > 5) *cur++ = scale_ * ((*in >> 2) & 0x01);
+            if (k > 6) *cur++ = scale_ * ((*in >> 1) & 0x01);
          }
          if (img_n != out_n) {
             int q;
@@ -5414,7 +5414,7 @@ static void *stbi__bmp_load(stbi__context *s, int *x, int *y, int *comp, int req
       }
       if (!easy) {
          if (!mr || !mg || !mb) { STBI_FREE(out); return stbi__errpuc("bad masks", "Corrupt BMP"); }
-         // right shift amt to put high bit in position #7
+         // right shift amt to put high bit in position_ #7
          rshift = stbi__high_bit(mr)-7; rcount = stbi__bitcount(mr);
          gshift = stbi__high_bit(mg)-7; gcount = stbi__bitcount(mg);
          bshift = stbi__high_bit(mb)-7; bcount = stbi__bitcount(mb);
@@ -5669,7 +5669,7 @@ static void *stbi__tga_load(stbi__context *s, int *x, int *y, int *comp, int req
    tga_data = (unsigned char*)stbi__malloc_mad3(tga_width, tga_height, tga_comp, 0);
    if (!tga_data) return stbi__errpuc("outofmem", "Out of memory");
 
-   // skip to the data's starting position (offset usually = 0)
+   // skip to the data's starting position_ (offset usually = 0)
    stbi__skip(s, tga_offset );
 
    if ( !tga_indexed && !tga_is_RLE && !tga_rgb16 ) {
@@ -7370,10 +7370,10 @@ STBIDEF int stbi_info_from_file(FILE *f, int *x, int *y, int *comp)
 {
    int r;
    stbi__context s;
-   long position = ftell(f);
+   long position_ = ftell(f);
    stbi__start_file(&s, f);
    r = stbi__info_main(&s,x,y,comp);
-   fseek(f,position,SEEK_SET);
+   fseek(f,position_,SEEK_SET);
    return r;
 }
 
@@ -7391,10 +7391,10 @@ STBIDEF int stbi_is_16_bit_from_file(FILE *f)
 {
    int r;
    stbi__context s;
-   long position = ftell(f);
+   long position_ = ftell(f);
    stbi__start_file(&s, f);
    r = stbi__is_16_main(&s);
-   fseek(f,position,SEEK_SET);
+   fseek(f,position_,SEEK_SET);
    return r;
 }
 #endif // !STBI_NO_STDIO

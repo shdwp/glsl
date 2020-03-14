@@ -16,6 +16,7 @@ using std::make_shared;
 using std::weak_ptr;
 
 using std::move;
+using std::forward;
 
 #include <vector>
 using std::vector;

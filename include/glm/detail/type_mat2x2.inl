@@ -6,7 +6,7 @@ namespace glm
 
 #	if GLM_CONFIG_DEFAULTED_FUNCTIONS == GLM_DISABLE
 		template<typename T, qualifier Q>
-		GLM_FUNC_QUALIFIER GLM_CONSTEXPR mat<2, 2, T, Q>::mat()
+		GLM_FUNC_QUALIFIER GLM_CONSTEXPR mat_<2, 2, T, Q>::mat_()
 #			if GLM_CONFIG_CTOR_INIT == GLM_CTOR_INITIALIZER_LIST
 				: value{col_type(1, 0), col_type(0, 1)}
 #			endif

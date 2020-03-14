@@ -22,9 +22,9 @@ set(SOURCE_FILES
         src/glmisc/text/TextObject.h
         src/glmisc/gen/Primitives.cpp
         src/glmisc/gen/Primitives.h
-        src/glmisc/entities/Shape.cpp
-        src/glmisc/entities/Shape.h
-        src/glmisc/entities/TexturedShape.cpp src/glmisc/entities/TexturedShape.h)
+        src/glmisc/objects/GObject.cpp
+        src/glmisc/objects/GObject.h
+        src/glmisc/gl/Material.cpp src/glmisc/gl/Material.h src/glmisc/objects/Light.cpp src/glmisc/objects/Light.h src/glmisc/scene/Scene.cpp src/glmisc/scene/Scene.h)
 
 add_executable(glpl ${SOURCE_FILES})
 set_source_files_properties(${SOURCE_FILES} PROPERTIES COMPILE_FLAGS "-include ../src/pch.h")

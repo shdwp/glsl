@@ -13,14 +13,14 @@
 #include <glm/glm.hpp>
 
 class TextObject {
-    unique_ptr<VertexBufferObject> m_vb;
-    unique_ptr<ShaderProgram> m_shader;
-    shared_ptr<Texture2D> m_tex;
+    unique_ptr<VertexBufferObject> vb_;
+    unique_ptr<ShaderProgram> shader_;
+    shared_ptr<Texture2D> tex_;
 
 public:
-    glm::mat4 proj = glm::mat4(1.f);
+    glm::mat4 proj_ = glm::mat4(1.f);
 
-    TextObject(shared_ptr<Texture2D> tex, string str, float size = 24.f);
+    TextObject(const shared_ptr<Texture2D> &tex, string str, float size = 24.f);
 
     void render();
 };

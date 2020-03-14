@@ -1192,10 +1192,10 @@ typedef struct GLFWcursor GLFWcursor;
  */
 typedef void (* GLFWerrorfun)(int,const char*);
 
-/*! @brief The function pointer type for window position callbacks.
+/*! @brief The function pointer type for window position_ callbacks.
  *
- *  This is the function pointer type for window position callbacks.  A window
- *  position callback function has the following signature:
+ *  This is the function pointer type for window position_ callbacks.  A window
+ *  position_ callback function has the following signature:
  *  @code
  *  void callback_name(GLFWwindow* window, int xpos, int ypos)
  *  @endcode
@@ -1361,17 +1361,17 @@ typedef void (* GLFWwindowmaximizefun)(GLFWwindow*,int);
  */
 typedef void (* GLFWframebuffersizefun)(GLFWwindow*,int,int);
 
-/*! @brief The function pointer type for window content scale callbacks.
+/*! @brief The function pointer type for window content scale_ callbacks.
  *
- *  This is the function pointer type for window content scale callbacks.
- *  A window content scale callback function has the following signature:
+ *  This is the function pointer type for window content scale_ callbacks.
+ *  A window content scale_ callback function has the following signature:
  *  @code
  *  void function_name(GLFWwindow* window, float xscale, float yscale)
  *  @endcode
  *
- *  @param[in] window The window whose content scale changed.
- *  @param[in] xscale The new x-axis content scale of the window.
- *  @param[in] yscale The new y-axis content scale of the window.
+ *  @param[in] window The window whose content scale_ changed.
+ *  @param[in] xscale The new x-axis content scale_ of the window.
+ *  @param[in] yscale The new y-axis content scale_ of the window.
  *
  *  @sa @ref window_scale
  *  @sa @ref glfwSetWindowContentScaleCallback
@@ -1408,10 +1408,10 @@ typedef void (* GLFWwindowcontentscalefun)(GLFWwindow*,float,float);
  */
 typedef void (* GLFWmousebuttonfun)(GLFWwindow*,int,int,int);
 
-/*! @brief The function pointer type for cursor position callbacks.
+/*! @brief The function pointer type for cursor position_ callbacks.
  *
- *  This is the function pointer type for cursor position callbacks.  A cursor
- *  position callback function has the following signature:
+ *  This is the function pointer type for cursor position_ callbacks.  A cursor
+ *  position_ callback function has the following signature:
  *  @code
  *  void function_name(GLFWwindow* window, double xpos, double ypos);
  *  @endcode
@@ -2016,13 +2016,13 @@ GLFWAPI GLFWmonitor** glfwGetMonitors(int* count);
  */
 GLFWAPI GLFWmonitor* glfwGetPrimaryMonitor(void);
 
-/*! @brief Returns the position of the monitor's viewport on the virtual screen.
+/*! @brief Returns the position_ of the monitor's viewport on the virtual screen.
  *
- *  This function returns the position, in screen coordinates, of the upper-left
+ *  This function returns the position_, in screen coordinates, of the upper-left
  *  corner of the specified monitor.
  *
- *  Any or all of the position arguments may be `NULL`.  If an error occurs, all
- *  non-`NULL` position arguments will be set to zero.
+ *  Any or all of the position_ arguments may be `NULL`.  If an error occurs, all
+ *  non-`NULL` position_ arguments will be set to zero.
  *
  *  @param[in] monitor The monitor to query.
  *  @param[out] xpos Where to store the monitor x-coordinate, or `NULL`.
@@ -2043,15 +2043,15 @@ GLFWAPI void glfwGetMonitorPos(GLFWmonitor* monitor, int* xpos, int* ypos);
 
 /*! @brief Retrieves the work area of the monitor.
  *
- *  This function returns the position, in screen coordinates, of the upper-left
+ *  This function returns the position_, in screen coordinates, of the upper-left
  *  corner of the work area of the specified monitor along with the work area
  *  size in screen coordinates. The work area is defined as the area of the
  *  monitor not occluded by the operating system task bar where present. If no
  *  task bar exists then the work area is the monitor resolution in screen
  *  coordinates.
  *
- *  Any or all of the position and size arguments may be `NULL`.  If an error
- *  occurs, all non-`NULL` position and size arguments will be set to zero.
+ *  Any or all of the position_ and size arguments may be `NULL`.  If an error
+ *  occurs, all non-`NULL` position_ and size arguments will be set to zero.
  *
  *  @param[in] monitor The monitor to query.
  *  @param[out] xpos Where to store the monitor x-coordinate, or `NULL`.
@@ -2106,23 +2106,23 @@ GLFWAPI void glfwGetMonitorWorkarea(GLFWmonitor* monitor, int* xpos, int* ypos, 
  */
 GLFWAPI void glfwGetMonitorPhysicalSize(GLFWmonitor* monitor, int* widthMM, int* heightMM);
 
-/*! @brief Retrieves the content scale for the specified monitor.
+/*! @brief Retrieves the content scale_ for the specified monitor.
  *
- *  This function retrieves the content scale for the specified monitor.  The
- *  content scale is the ratio between the current DPI and the platform's
+ *  This function retrieves the content scale_ for the specified monitor.  The
+ *  content scale_ is the ratio between the current DPI and the platform's
  *  default DPI.  This is especially important for text and any UI elements.  If
  *  the pixel dimensions of your UI scaled by this look appropriate on your
  *  machine then it should appear at a reasonable size on other machines
  *  regardless of their DPI and scaling settings.  This relies on the system DPI
  *  and scaling settings being somewhat correct.
  *
- *  The content scale may depend on both the monitor resolution and pixel
+ *  The content scale_ may depend on both the monitor resolution and pixel
  *  density and on user settings.  It may be very different from the raw DPI
  *  calculated from the physical size and current resolution.
  *
  *  @param[in] monitor The monitor to query.
- *  @param[out] xscale Where to store the x-axis content scale, or `NULL`.
- *  @param[out] yscale Where to store the y-axis content scale, or `NULL`.
+ *  @param[out] xscale Where to store the x-axis content scale_, or `NULL`.
+ *  @param[out] yscale Where to store the y-axis content scale_, or `NULL`.
  *
  *  @errors Possible errors include @ref GLFW_NOT_INITIALIZED and @ref
  *  GLFW_PLATFORM_ERROR.
@@ -2537,9 +2537,9 @@ GLFWAPI void glfwWindowHintString(int hint, const char* value);
  *  OpenGL or OpenGL ES context.
  *
  *  By default, newly created windows use the placement recommended by the
- *  window system.  To create the window at a specific position, make it
+ *  window system.  To create the window at a specific position_, make it
  *  initially invisible using the [GLFW_VISIBLE](@ref GLFW_VISIBLE_hint) window
- *  hint, set its [position](@ref window_pos) and then [show](@ref window_hide)
+ *  hint, set its [position_](@ref window_pos) and then [show](@ref window_hide)
  *  it.
  *
  *  As long as at least one full screen window is not iconified, the screensaver
@@ -2612,14 +2612,14 @@ GLFWAPI void glfwWindowHintString(int hint, const char* value);
  *
  *  @remark @macos When activating frame autosaving with
  *  [GLFW_COCOA_FRAME_NAME](@ref GLFW_COCOA_FRAME_NAME_hint), the specified
- *  window size and position may be overridden by previously saved values.
+ *  window size and position_ may be overridden by previously saved values.
  *
  *  @remark @x11 Some window managers will not respect the placement of
  *  initially hidden windows.
  *
  *  @remark @x11 Due to the asynchronous nature of X11, it may take a moment for
  *  a window to reach its requested state.  This means you may not be able to
- *  query the final size, position or other attributes directly after window
+ *  query the final size, position_ or other attributes directly after window
  *  creation.
  *
  *  @remark @x11 The class part of the `WM_CLASS` window property will by
@@ -2798,13 +2798,13 @@ GLFWAPI void glfwSetWindowTitle(GLFWwindow* window, const char* title);
  */
 GLFWAPI void glfwSetWindowIcon(GLFWwindow* window, int count, const GLFWimage* images);
 
-/*! @brief Retrieves the position of the content area of the specified window.
+/*! @brief Retrieves the position_ of the content area of the specified window.
  *
- *  This function retrieves the position, in screen coordinates, of the
+ *  This function retrieves the position_, in screen coordinates, of the
  *  upper-left corner of the content area of the specified window.
  *
- *  Any or all of the position arguments may be `NULL`.  If an error occurs, all
- *  non-`NULL` position arguments will be set to zero.
+ *  Any or all of the position_ arguments may be `NULL`.  If an error occurs, all
+ *  non-`NULL` position_ arguments will be set to zero.
  *
  *  @param[in] window The window to query.
  *  @param[out] xpos Where to store the x-coordinate of the upper-left corner of
@@ -2816,7 +2816,7 @@ GLFWAPI void glfwSetWindowIcon(GLFWwindow* window, int count, const GLFWimage* i
  *  GLFW_PLATFORM_ERROR.
  *
  *  @remark @wayland There is no way for an application to retrieve the global
- *  position of its windows, this function will always emit @ref
+ *  position_ of its windows, this function will always emit @ref
  *  GLFW_PLATFORM_ERROR.
  *
  *  @thread_safety This function must only be called from the main thread.
@@ -2830,9 +2830,9 @@ GLFWAPI void glfwSetWindowIcon(GLFWwindow* window, int count, const GLFWimage* i
  */
 GLFWAPI void glfwGetWindowPos(GLFWwindow* window, int* xpos, int* ypos);
 
-/*! @brief Sets the position of the content area of the specified window.
+/*! @brief Sets the position_ of the content area of the specified window.
  *
- *  This function sets the position, in screen coordinates, of the upper-left
+ *  This function sets the position_, in screen coordinates, of the upper-left
  *  corner of the content area of the specified windowed mode window.  If the
  *  window is a full screen window, this function does nothing.
  *
@@ -2850,7 +2850,7 @@ GLFWAPI void glfwGetWindowPos(GLFWwindow* window, int* xpos, int* ypos);
  *  GLFW_PLATFORM_ERROR.
  *
  *  @remark @wayland There is no way for an application to set the global
- *  position of its windows, this function will always emit @ref
+ *  position_ of its windows, this function will always emit @ref
  *  GLFW_PLATFORM_ERROR.
  *
  *  @thread_safety This function must only be called from the main thread.
@@ -3088,23 +3088,23 @@ GLFWAPI void glfwGetFramebufferSize(GLFWwindow* window, int* width, int* height)
  */
 GLFWAPI void glfwGetWindowFrameSize(GLFWwindow* window, int* left, int* top, int* right, int* bottom);
 
-/*! @brief Retrieves the content scale for the specified window.
+/*! @brief Retrieves the content scale_ for the specified window.
  *
- *  This function retrieves the content scale for the specified window.  The
- *  content scale is the ratio between the current DPI and the platform's
+ *  This function retrieves the content scale_ for the specified window.  The
+ *  content scale_ is the ratio between the current DPI and the platform's
  *  default DPI.  This is especially important for text and any UI elements.  If
  *  the pixel dimensions of your UI scaled by this look appropriate on your
  *  machine then it should appear at a reasonable size on other machines
  *  regardless of their DPI and scaling settings.  This relies on the system DPI
  *  and scaling settings being somewhat correct.
  *
- *  On systems where each monitors can have its own content scale, the window
- *  content scale will depend on which monitor the system considers the window
+ *  On systems where each monitors can have its own content scale_, the window
+ *  content scale_ will depend on which monitor the system considers the window
  *  to be on.
  *
  *  @param[in] window The window to query.
- *  @param[out] xscale Where to store the x-axis content scale, or `NULL`.
- *  @param[out] yscale Where to store the y-axis content scale, or `NULL`.
+ *  @param[out] xscale Where to store the x-axis content scale_, or `NULL`.
+ *  @param[out] yscale Where to store the y-axis content scale_, or `NULL`.
  *
  *  @errors Possible errors include @ref GLFW_NOT_INITIALIZED and @ref
  *  GLFW_PLATFORM_ERROR.
@@ -3404,9 +3404,9 @@ GLFWAPI GLFWmonitor* glfwGetWindowMonitor(GLFWwindow* window);
  *
  *  When setting a monitor, this function updates the width, height and refresh
  *  rate of the desired video mode and switches to the video mode closest to it.
- *  The window position is ignored when setting a monitor.
+ *  The window position_ is ignored when setting a monitor.
  *
- *  When the monitor is `NULL`, the position, width and height are used to
+ *  When the monitor is `NULL`, the position_, width and height are used to
  *  place the window content area.  The refresh rate is ignored when no monitor
  *  is specified.
  *
@@ -3437,7 +3437,7 @@ GLFWAPI GLFWmonitor* glfwGetWindowMonitor(GLFWwindow* window);
  *  affected by any resizing or mode switching, although you may need to update
  *  your viewport if the framebuffer size has changed.
  *
- *  @remark @wayland The desired window position is ignored, as there is no way
+ *  @remark @wayland The desired window position_ is ignored, as there is no way
  *  for an application to set this property.
  *
  *  @remark @wayland Setting the window to full screen will not attempt to
@@ -3571,11 +3571,11 @@ GLFWAPI void glfwSetWindowUserPointer(GLFWwindow* window, void* pointer);
  */
 GLFWAPI void* glfwGetWindowUserPointer(GLFWwindow* window);
 
-/*! @brief Sets the position callback for the specified window.
+/*! @brief Sets the position_ callback for the specified window.
  *
- *  This function sets the position callback of the specified window, which is
+ *  This function sets the position_ callback of the specified window, which is
  *  called when the window is moved.  The callback is provided with the
- *  position, in screen coordinates, of the upper-left corner of the content
+ *  position_, in screen coordinates, of the upper-left corner of the content
  *  area of the window.
  *
  *  @param[in] window The window whose callback to set.
@@ -3594,7 +3594,7 @@ GLFWAPI void* glfwGetWindowUserPointer(GLFWwindow* window);
  *  @errors Possible errors include @ref GLFW_NOT_INITIALIZED.
  *
  *  @remark @wayland This callback will never be called, as there is no way for
- *  an application to know its global position.
+ *  an application to know its global position_.
  *
  *  @thread_safety This function must only be called from the main thread.
  *
@@ -3842,10 +3842,10 @@ GLFWAPI GLFWwindowmaximizefun glfwSetWindowMaximizeCallback(GLFWwindow* window, 
  */
 GLFWAPI GLFWframebuffersizefun glfwSetFramebufferSizeCallback(GLFWwindow* window, GLFWframebuffersizefun callback);
 
-/*! @brief Sets the window content scale callback for the specified window.
+/*! @brief Sets the window content scale_ callback for the specified window.
  *
- *  This function sets the window content scale callback of the specified window,
- *  which is called when the content scale of the specified window changes.
+ *  This function sets the window content scale_ callback of the specified window,
+ *  which is called when the content scale_ of the specified window changes.
  *
  *  @param[in] window The window whose callback to set.
  *  @param[in] callback The new callback, or `NULL` to remove the currently set
@@ -4302,23 +4302,23 @@ GLFWAPI int glfwGetKey(GLFWwindow* window, int key);
  */
 GLFWAPI int glfwGetMouseButton(GLFWwindow* window, int button);
 
-/*! @brief Retrieves the position of the cursor relative to the content area of
+/*! @brief Retrieves the position_ of the cursor relative to the content area of
  *  the window.
  *
- *  This function returns the position of the cursor, in screen coordinates,
+ *  This function returns the position_ of the cursor, in screen coordinates,
  *  relative to the upper-left corner of the content area of the specified
  *  window.
  *
  *  If the cursor is disabled (with `GLFW_CURSOR_DISABLED`) then the cursor
- *  position is unbounded and limited only by the minimum and maximum values of
+ *  position_ is unbounded and limited only by the minimum and maximum values of
  *  a `double`.
  *
  *  The coordinate can be converted to their integer equivalents with the
  *  `floor` function.  Casting directly to an integer type works for positive
  *  coordinates, but fails for negative ones.
  *
- *  Any or all of the position arguments may be `NULL`.  If an error occurs, all
- *  non-`NULL` position arguments will be set to zero.
+ *  Any or all of the position_ arguments may be `NULL`.  If an error occurs, all
+ *  non-`NULL` position_ arguments will be set to zero.
  *
  *  @param[in] window The desired window.
  *  @param[out] xpos Where to store the cursor x-coordinate, relative to the
@@ -4340,10 +4340,10 @@ GLFWAPI int glfwGetMouseButton(GLFWwindow* window, int button);
  */
 GLFWAPI void glfwGetCursorPos(GLFWwindow* window, double* xpos, double* ypos);
 
-/*! @brief Sets the position of the cursor, relative to the content area of the
+/*! @brief Sets the position_ of the cursor, relative to the content area of the
  *  window.
  *
- *  This function sets the position, in screen coordinates, of the cursor
+ *  This function sets the position_, in screen coordinates, of the cursor
  *  relative to the upper-left corner of the content area of the specified
  *  window.  The window must have input focus.  If the window does not have
  *  input focus when this function is called, it fails silently.
@@ -4353,7 +4353,7 @@ GLFWAPI void glfwGetCursorPos(GLFWwindow* window, double* xpos, double* ypos);
  *  cursor, transparently re-centers it and provides unconstrained cursor
  *  motion.  See @ref glfwSetInputMode for more information.
  *
- *  If the cursor mode is `GLFW_CURSOR_DISABLED` then the cursor position is
+ *  If the cursor mode is `GLFW_CURSOR_DISABLED` then the cursor position_ is
  *  unconstrained and limited only by the minimum and maximum values of
  *  a `double`.
  *
@@ -4667,11 +4667,11 @@ GLFWAPI GLFWcharmodsfun glfwSetCharModsCallback(GLFWwindow* window, GLFWcharmods
  */
 GLFWAPI GLFWmousebuttonfun glfwSetMouseButtonCallback(GLFWwindow* window, GLFWmousebuttonfun callback);
 
-/*! @brief Sets the cursor position callback.
+/*! @brief Sets the cursor position_ callback.
  *
- *  This function sets the cursor position callback of the specified window,
+ *  This function sets the cursor position_ callback of the specified window,
  *  which is called when the cursor is moved.  The callback is provided with the
- *  position, in screen coordinates, relative to the upper-left corner of the
+ *  position_, in screen coordinates, relative to the upper-left corner of the
  *  content area of the window.
  *
  *  @param[in] window The window whose callback to set.
@@ -4918,7 +4918,7 @@ GLFWAPI const unsigned char* glfwGetJoystickButtons(int jid, int* count);
  *
  *  The diagonal directions are bitwise combinations of the primary (up, right,
  *  down and left) directions and you can test for these individually by ANDing
- *  it with the corresponding direction.
+ *  it with the corresponding direction_.
  *
  *  @code
  *  if (hats[2] & GLFW_HAT_RIGHT)
@@ -5766,7 +5766,7 @@ GLFWAPI GLFWvkproc glfwGetInstanceProcAddress(VkInstance instance, const char* p
  *  a `vkGetPhysicalDevice*PresentationSupport` type function.
  *
  *  @thread_safety This function may be called from any thread.  For
- *  synchronization details of Vulkan entities, see the Vulkan specification.
+ *  synchronization details of Vulkan objects_, see the Vulkan specification.
  *
  *  @sa @ref vulkan_present
  *
@@ -5826,7 +5826,7 @@ GLFWAPI int glfwGetPhysicalDevicePresentationSupport(VkInstance instance, VkPhys
  *  the window content view, which is required for MoltenVK to function.
  *
  *  @thread_safety This function may be called from any thread.  For
- *  synchronization details of Vulkan entities, see the Vulkan specification.
+ *  synchronization details of Vulkan objects_, see the Vulkan specification.
  *
  *  @sa @ref vulkan_surface
  *  @sa @ref glfwGetRequiredInstanceExtensions

@@ -11,17 +11,17 @@
 
 class Texture2D {
 public:
-    texture_object_t Id;
-    Texture2D(std::string path);
-
-    void filter(GLenum val) {
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, val);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, val);
-    }
+    texture_object_t id_;
+    Texture2D(string path, GLenum filter = GL_NEAREST);
 
     void bind(GLenum unit = GL_TEXTURE0) {
         glActiveTexture(unit);
-        glBindTexture(GL_TEXTURE_2D, Id);
+        glBindTexture(GL_TEXTURE_2D, id_);
+    }
+
+    static void Unbind(GLenum unit = GL_TEXTURE0) {
+        glActiveTexture(unit);
+        glBindTexture(GL_TEXTURE_2D, 0);
     }
 };
 

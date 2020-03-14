@@ -6,8 +6,6 @@
 #define GLPL_SHADERPROGRAM_H
 
 #include "../gl_misc.h"
-#include <vector>
-#include <string>
 #include <glm/glm.hpp>
 
 enum shader_argument_type {
@@ -17,21 +15,21 @@ enum shader_argument_type {
 
 struct shader_argument_struct {
     shader_argument_type type;
-    std::string path;
+    string path;
 };
 
 typedef shader_argument_struct shader_argument_t;
 
-shader_argument_t shader_argument(shader_argument_type type, std::string path);
+shader_argument_t shader_argument(shader_argument_type type, string path);
 
 class ShaderProgram {
 public:
-    program_object_t Id;
+    program_object_t id_;
 
-    ShaderProgram(std::vector<shader_argument_t> shaders);
+    explicit ShaderProgram(vector<shader_argument_t> shaders);
 
     void use() {
-        glUseProgram(Id);
+        glUseProgram(id_);
     }
 
     void uniform(const char *name, int a);
