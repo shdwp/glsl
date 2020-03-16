@@ -52,7 +52,7 @@ namespace glm
 		if(abs(x.w / magnitude) > cos_one_over_two<T>())
 		{
 			//Scalar component is close to 1; using it to recover angle would lose precision
-			//Instead, we use the non-scalar components since sin() is accurate around 0
+			//Instead, we activate the non-scalar components since sin() is accurate around 0
 
 			//Prevent a division by 0 error later on
 			T VectorMagnitude = x.x * x.x + x.y * x.y + x.z * x.z;

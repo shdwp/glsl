@@ -6,7 +6,7 @@ namespace glm
 
 #	if GLM_CONFIG_DEFAULTED_FUNCTIONS == GLM_DISABLE
 		template<typename T, qualifier Q>
-		GLM_FUNC_QUALIFIER GLM_CONSTEXPR mat_<4, 4, T, Q>::mat_()
+		GLM_FUNC_QUALIFIER GLM_CONSTEXPR mat<4, 4, T, Q>::mat()
 #			if GLM_CONFIG_CTOR_INIT == GLM_CTOR_INITIALIZER_LIST
 				: value{col_type(1, 0, 0, 0), col_type(0, 1, 0, 0), col_type(0, 0, 1, 0), col_type(0, 0, 0, 1)}
 #			endif
@@ -555,7 +555,7 @@ namespace glm
 
 		__m128 a2 = _mm_add_ps(a0, a1);
 
-		return typename mat_<4, 4, T, Q>::col_type(a2);
+		return typename mat<4, 4, T, Q>::col_type(a2);
 */
 
 		typename mat<4, 4, T, Q>::col_type const Mov0(v[0]);
@@ -572,7 +572,7 @@ namespace glm
 		return Add2;
 
 /*
-		return typename mat_<4, 4, T, Q>::col_type(
+		return typename mat<4, 4, T, Q>::col_type(
 			m[0][0] * v[0] + m[1][0] * v[1] + m[2][0] * v[2] + m[3][0] * v[3],
 			m[0][1] * v[0] + m[1][1] * v[1] + m[2][1] * v[2] + m[3][1] * v[3],
 			m[0][2] * v[0] + m[1][2] * v[1] + m[2][2] * v[2] + m[3][2] * v[3],

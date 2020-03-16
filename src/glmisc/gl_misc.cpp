@@ -36,6 +36,7 @@ void APIENTRY glDebugOutput(GLenum source,
 {
 // ignore non-significant error/warning codes
     if(id == 131169 || id == 131185 || id == 131218 || id == 131204) return;
+    if (id == 131186) return;
 
     std::cout << "---------------" << std::endl;
     std::cout << "Debug message (" << id << "): " <<  message << std::endl;
@@ -76,11 +77,11 @@ void APIENTRY glDebugOutput(GLenum source,
 GLFWwindow  *glmisc_setup_window() {
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
 
-    GLFWwindow *window = glfwCreateWindow(1600, 1200, "LearnOpenGL", nullptr, nullptr);
+    GLFWwindow *window = glfwCreateWindow(1600, 1200, "glpl", nullptr, nullptr);
     if (window == nullptr) {
         std::cout << "Failed to create window" << std::endl;
         glfwTerminate();

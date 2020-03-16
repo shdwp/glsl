@@ -8,7 +8,7 @@
 /// @defgroup gtx_component_wise GLM_GTX_component_wise
 /// @ingroup gtx
 ///
-/// Include <glm/gtx/component_wise.hpp> to use the features of this extension.
+/// Include <glm/gtx/component_wise.hpp> to activate the features of this extension.
 ///
 /// Operations between components of a type
 
@@ -20,7 +20,7 @@
 
 #if GLM_MESSAGES == GLM_ENABLE && !defined(GLM_EXT_INCLUDED)
 #	ifndef GLM_ENABLE_EXPERIMENTAL
-#		pragma message("GLM: GLM_GTX_component_wise is an experimental extension and may change in the future. Use #define GLM_ENABLE_EXPERIMENTAL before including it, if you really want to use it.")
+#		pragma message("GLM: GLM_GTX_component_wise is an experimental extension and may change in the future. Use #define GLM_ENABLE_EXPERIMENTAL before including it, if you really want to activate it.")
 #	else
 #		pragma message("GLM: GLM_GTX_component_wise extension included")
 #	endif

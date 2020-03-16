@@ -10,7 +10,7 @@
 ///
 /// These all operate component-wise. The description is per component.
 ///
-/// Include <glm/common.hpp> to use these core features.
+/// Include <glm/common.hpp> to activate these core features.
 
 #pragma once
 
@@ -77,8 +77,8 @@ namespace glm
 	GLM_FUNC_DECL vec<L, T, Q> trunc(vec<L, T, Q> const& x);
 
 	/// Returns a value equal to the nearest integer to x.
-	/// The fraction 0.5 will round in a direction_ chosen by the
-	/// implementation, presumably the direction_ that is fastest.
+	/// The fraction 0.5 will round in a direction chosen by the
+	/// implementation, presumably the direction that is fastest.
 	/// This includes the possibility that round(x) returns the
 	/// same value as roundEven(x) for all values of x.
 	///

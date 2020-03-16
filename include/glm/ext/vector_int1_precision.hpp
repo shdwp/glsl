@@ -6,7 +6,7 @@
 ///
 /// Exposes highp_ivec1, mediump_ivec1 and lowp_ivec1 types.
 ///
-/// Include <glm/ext/vector_int1_precision.hpp> to use the features of this extension.
+/// Include <glm/ext/vector_int1_precision.hpp> to activate the features of this extension.
 
 #pragma once
 

@@ -1,5 +1,5 @@
 /* stb_image - v2.25 - public domain image loader - http://nothings.org/stb
-                                  no warranty implied; use at your own risk
+                                  no warranty implied; activate at your own risk
 
    Do this:
       #define STB_IMAGE_IMPLEMENTATION
@@ -65,7 +65,7 @@ RECENT REVISION HISTORY:
       2.11  (2016-04-02) 16-bit PNGS; enable SSE2 in non-gcc x64
                          RGB-format JPEG; remove white matting in PSD;
                          allocate large structures on the stack;
-                         correct channel count for PNG & BMP
+                         correct channel count_ for PNG & BMP
       2.10  (2016-01-22) avoid warning introduced in 2.09
       2.09  (2016-01-16) 16-bit TGA; comments in PNM files; STBI_REALLOC_SIZED
 
@@ -171,7 +171,7 @@ RECENT REVISION HISTORY:
 //
 // UNICODE:
 //
-//   If compiling for Windows and you wish to use Unicode filenames, compile
+//   If compiling for Windows and you wish to activate Unicode filenames, compile
 //   with
 //       #define STBI_WINDOWS_UTF8
 //   and pass utf8-encoded filenames. Call stbi_convert_wchar_to_utf8 to convert
@@ -183,22 +183,22 @@ RECENT REVISION HISTORY:
 //
 // stb libraries are designed with the following priorities:
 //
-//    1. easy to use
+//    1. easy to activate
 //    2. easy to maintain
 //    3. good performance
 //
 // Sometimes I let "good performance" creep up in priority over "easy to maintain",
-// and for best performance I may provide less-easy-to-use APIs that give higher
-// performance, in addition to the easy-to-use ones. Nevertheless, it's important
+// and for best performance I may provide less-easy-to-activate APIs that give higher
+// performance, in addition to the easy-to-activate ones. Nevertheless, it's important
 // to keep in mind that from the standpoint of you, a client of this library,
 // all you care about is #1 and #3, and stb libraries DO NOT emphasize #3 above all.
 //
 // Some secondary priorities arise directly from the first two, some of which
 // provide more explicit reasons why performance can't be emphasized.
 //
-//    - Portable ("ease of use")
+//    - Portable ("ease of activate")
 //    - Small source code footprint ("easy to maintain")
-//    - No dependencies ("ease of use")
+//    - No dependencies ("ease of activate")
 //
 // ===========================================================================
 //
@@ -216,7 +216,7 @@ RECENT REVISION HISTORY:
 //
 // SIMD support
 //
-// The JPEG decoder will try to automatically use SIMD kernels on x86 when
+// The JPEG decoder will try to automatically activate SIMD kernels on x86 when
 // supported by the compiler. For ARM Neon support, you must explicitly
 // request it.
 //
@@ -229,7 +229,7 @@ RECENT REVISION HISTORY:
 // (at least this is true for iOS and Android). Therefore, the NEON support is
 // toggled by a build flag: define STBI_NEON to get NEON loops.
 //
-// If for some reason you do not want to use any of SIMD code, or if
+// If for some reason you do not want to activate any of SIMD code, or if
 // you have issues compiling it, you can disable it entirely by
 // defining STBI_NO_SIMD.
 //
@@ -240,13 +240,13 @@ RECENT REVISION HISTORY:
 // stb_image supports loading HDR images in general, and currently the Radiance
 // .HDR file format specifically. You can still load any file through the existing
 // interface; if you attempt to load an HDR file, it will be automatically remapped
-// to LDR, assuming gamma 2.2 and an arbitrary scale_ factor defaulting to 1;
+// to LDR, assuming gamma 2.2 and an arbitrary scale factor defaulting to 1;
 // both of these constants can be reconfigured through this interface:
 //
 //     stbi_hdr_to_ldr_gamma(2.2f);
 //     stbi_hdr_to_ldr_scale(1.0f);
 //
-// (note, do not use _inverse_ constants; stbi_image will invert them
+// (note, do not activate _inverse_ constants; stbi_image will invert them
 // appropriately).
 //
 // Additionally, there is a new, parallel interface for loading files as
@@ -263,7 +263,7 @@ RECENT REVISION HISTORY:
 //
 // Finally, given a filename (or an open file or memory block--see header
 // file for details) containing image data, you can query for the "most
-// appropriate" interface to use (that is, whether the image is HDR or
+// appropriate" interface to activate (that is, whether the image is HDR or
 // not), using:
 //
 //     stbi_is_hdr(char *filename);
@@ -315,7 +315,7 @@ RECENT REVISION HISTORY:
 //        STBI_ONLY_PIC
 //        STBI_ONLY_PNM   (.ppm and .pgm)
 //
-//   - If you use STBI_NO_PNG (or _ONLY_ without PNG), and you still
+//   - If you activate STBI_NO_PNG (or _ONLY_ without PNG), and you still
 //     want the zlib decoder to be available, #define STBI_SUPPORT_ZLIB
 //
 
@@ -1444,12 +1444,12 @@ STBIDEF int      stbi_is_hdr          (char const *filename)
 STBIDEF int stbi_is_hdr_from_file(FILE *f)
 {
    #ifndef STBI_NO_HDR
-   long position_ = ftell(f);
+   long position = ftell(f);
    int res;
    stbi__context s;
    stbi__start_file(&s,f);
    res = stbi__hdr_test(&s);
-   fseek(f, position_, SEEK_SET);
+   fseek(f, position, SEEK_SET);
    return res;
    #else
    STBI_NOTUSED(f);
@@ -1475,13 +1475,13 @@ STBIDEF int      stbi_is_hdr_from_callbacks(stbi_io_callbacks const *clbk, void 
 static float stbi__l2h_gamma=2.2f, stbi__l2h_scale=1.0f;
 
 STBIDEF void   stbi_ldr_to_hdr_gamma(float gamma) { stbi__l2h_gamma = gamma; }
-STBIDEF void   stbi_ldr_to_hdr_scale(float scale_) { stbi__l2h_scale = scale_; }
+STBIDEF void   stbi_ldr_to_hdr_scale(float scale) { stbi__l2h_scale = scale; }
 #endif
 
 static float stbi__h2l_gamma_i=1.0f/2.2f, stbi__h2l_scale_i=1.0f;
 
 STBIDEF void   stbi_hdr_to_ldr_gamma(float gamma) { stbi__h2l_gamma_i = 1/gamma; }
-STBIDEF void   stbi_hdr_to_ldr_scale(float scale_) { stbi__h2l_scale_i = 1/scale_; }
+STBIDEF void   stbi_hdr_to_ldr_scale(float scale) { stbi__h2l_scale_i = 1/scale; }
 
 
 //////////////////////////////////////////////////////////////////////////////
@@ -1568,12 +1568,12 @@ static int stbi__getn(stbi__context *s, stbi_uc *buffer, int n)
    if (s->io.read) {
       int blen = (int) (s->img_buffer_end - s->img_buffer);
       if (blen < n) {
-         int res, count;
+         int res, count_;
 
          memcpy(buffer, s->img_buffer, blen);
 
-         count = (s->io.read)(s->io_user_data, (char*) buffer + blen, n - blen);
-         res = (count == (n-blen));
+         count_ = (s->io.read)(s->io_user_data, (char*) buffer + blen, n - blen);
+         res = (count_ == (n-blen));
          s->img_buffer = s->img_buffer_end;
          return res;
       }
@@ -1861,7 +1861,7 @@ typedef struct
 // definition of jpeg image component
    struct
    {
-      int id_;
+      int gid;
       int h,v;
       int tq;
       int hd,ha;
@@ -1895,17 +1895,17 @@ typedef struct
 
 // kernels
    void (*idct_block_kernel)(stbi_uc *out, int out_stride, short data[64]);
-   void (*YCbCr_to_RGB_kernel)(stbi_uc *out, const stbi_uc *y, const stbi_uc *pcb, const stbi_uc *pcr, int count, int step);
+   void (*YCbCr_to_RGB_kernel)(stbi_uc *out, const stbi_uc *y, const stbi_uc *pcb, const stbi_uc *pcr, int count_, int step);
    stbi_uc *(*resample_row_hv_2_kernel)(stbi_uc *out, stbi_uc *in_near, stbi_uc *in_far, int w, int hs);
 } stbi__jpeg;
 
-static int stbi__build_huffman(stbi__huffman *h, int *count)
+static int stbi__build_huffman(stbi__huffman *h, int *count_)
 {
    int i,j,k=0;
    unsigned int code;
    // build size list for each symbol (from JPEG spec)
    for (i=0; i < 16; ++i)
-      for (j=0; j < count[i]; ++j)
+      for (j=0; j < count_[i]; ++j)
          h->size[k++] = (stbi_uc) (i+1);
    h->size[k] = 0;
 
@@ -1913,7 +1913,7 @@ static int stbi__build_huffman(stbi__huffman *h, int *count)
    code = 0;
    k = 0;
    for(j=1; j <= 16; ++j) {
-      // compute delta to add to code to compute symbol id_
+      // compute delta to add to code to compute symbol gid
       h->delta[j] = k - code;
       if (h->size[k] == j) {
          while (h->size[k] == j)
@@ -2029,11 +2029,11 @@ stbi_inline static int stbi__jpeg_huff_decode(stbi__jpeg *j, stbi__huffman *h)
    if (k > j->code_bits)
       return -1;
 
-   // convert the huffman code to the symbol id_
+   // convert the huffman code to the symbol gid
    c = ((j->code_buffer >> (32 - k)) & stbi__bmask[k]) + h->delta[k];
    STBI_ASSERT((((j->code_buffer) >> (32 - h->size[c])) & stbi__bmask[h->size[c]]) == h->code[c]);
 
-   // convert the id_ to a symbol
+   // convert the gid to a symbol
    j->code_bits -= k;
    j->code_buffer <<= k;
    return h->values[c];
@@ -2081,7 +2081,7 @@ stbi_inline static int stbi__jpeg_get_bit(stbi__jpeg *j)
    return k & 0x80000000;
 }
 
-// given a value that's at position_ X in the zigzag stream,
+// given a value that's at position X in the zigzag stream,
 // where does it appear in the 8x8 matrix coded as row-major?
 static const stbi_uc stbi__jpeg_dezigzag[64+15] =
 {
@@ -2386,7 +2386,7 @@ static void stbi__idct_block(stbi_uc *out, int out_stride, short data[64])
       // no fast case since the first 1D IDCT spread components out
       STBI__IDCT_1D(v[0],v[1],v[2],v[3],v[4],v[5],v[6],v[7])
       // constants scaled things up by 1<<12, plus we had 1<<2 from first
-      // loop, plus horizontal and vertical each scale_ by sqrt(8) so together
+      // loop, plus horizontal and vertical each scale by sqrt(8) so together
       // we've got an extra 1<<3, so 1<<17 total we need to remove.
       // so we want to round that, which means adding 0.5 * 1<<17,
       // aka 65536. Also, we'll end up with -128 to 127 that we want
@@ -2882,7 +2882,7 @@ static int stbi__parse_entropy_coded_data(stbi__jpeg *z)
                   }
                }
                // after all interleaved components, that's an interleaved MCU,
-               // so now count down the restart interval
+               // so now count_ down the restart interval
                if (--z->todo <= 0) {
                   if (z->code_bits < 24) stbi__grow_buffer_unsafe(z);
                   if (!STBI__RESTART(z->marker)) return 1;
@@ -2942,7 +2942,7 @@ static int stbi__parse_entropy_coded_data(stbi__jpeg *z)
                   }
                }
                // after all interleaved components, that's an interleaved MCU,
-               // so now count down the restart interval
+               // so now count_ down the restart interval
                if (--z->todo <= 0) {
                   if (z->code_bits < 24) stbi__grow_buffer_unsafe(z);
                   if (!STBI__RESTART(z->marker)) return 1;
@@ -3089,13 +3089,13 @@ static int stbi__process_scan_header(stbi__jpeg *z)
    int i;
    int Ls = stbi__get16be(z->s);
    z->scan_n = stbi__get8(z->s);
-   if (z->scan_n < 1 || z->scan_n > 4 || z->scan_n > (int) z->s->img_n) return stbi__err("bad SOS component count","Corrupt JPEG");
+   if (z->scan_n < 1 || z->scan_n > 4 || z->scan_n > (int) z->s->img_n) return stbi__err("bad SOS component count_","Corrupt JPEG");
    if (Ls != 6+2*z->scan_n) return stbi__err("bad SOS len","Corrupt JPEG");
    for (i=0; i < z->scan_n; ++i) {
-      int id_ = stbi__get8(z->s), which;
+      int gid = stbi__get8(z->s), which;
       int q = stbi__get8(z->s);
       for (which = 0; which < z->s->img_n; ++which)
-         if (z->img_comp[which].id_ == id_)
+         if (z->img_comp[which].gid == gid)
             break;
       if (which == z->s->img_n) return 0; // no match
       z->img_comp[which].hd = q >> 4;   if (z->img_comp[which].hd > 3) return stbi__err("bad DC huff","Corrupt JPEG");
@@ -3154,7 +3154,7 @@ static int stbi__process_frame_header(stbi__jpeg *z, int scan)
    s->img_y = stbi__get16be(s);   if (s->img_y == 0) return stbi__err("no header height", "JPEG format not supported: delayed height"); // Legal, but we don't handle it--but neither does IJG
    s->img_x = stbi__get16be(s);   if (s->img_x == 0) return stbi__err("0 width","Corrupt JPEG"); // JPEG requires
    c = stbi__get8(s);
-   if (c != 3 && c != 1 && c != 4) return stbi__err("bad component count","Corrupt JPEG");
+   if (c != 3 && c != 1 && c != 4) return stbi__err("bad component count_","Corrupt JPEG");
    s->img_n = c;
    for (i=0; i < c; ++i) {
       z->img_comp[i].data = NULL;
@@ -3166,8 +3166,8 @@ static int stbi__process_frame_header(stbi__jpeg *z, int scan)
    z->rgb = 0;
    for (i=0; i < s->img_n; ++i) {
       static const unsigned char rgb[3] = { 'R', 'G', 'B' };
-      z->img_comp[i].id_ = stbi__get8(s);
-      if (s->img_n == 3 && z->img_comp[i].id_ == rgb[i])
+      z->img_comp[i].gid = stbi__get8(s);
+      if (s->img_n == 3 && z->img_comp[i].gid == rgb[i])
          ++z->rgb;
       q = stbi__get8(s);
       z->img_comp[i].h = (q >> 4);  if (!z->img_comp[i].h || z->img_comp[i].h > 4) return stbi__err("bad H","Corrupt JPEG");
@@ -3513,10 +3513,10 @@ static stbi_uc *stbi__resample_row_generic(stbi_uc *out, stbi_uc *in_near, stbi_
 // this is a reduced-precision calculation of YCbCr-to-RGB introduced
 // to make sure the code produces the same results in both SIMD and scalar
 #define stbi__float2fixed(x)  (((int) ((x) * 4096.0f + 0.5f)) << 8)
-static void stbi__YCbCr_to_RGB_row(stbi_uc *out, const stbi_uc *y, const stbi_uc *pcb, const stbi_uc *pcr, int count, int step)
+static void stbi__YCbCr_to_RGB_row(stbi_uc *out, const stbi_uc *y, const stbi_uc *pcb, const stbi_uc *pcr, int count_, int step)
 {
    int i;
-   for (i=0; i < count; ++i) {
+   for (i=0; i < count_; ++i) {
       int y_fixed = (y[i] << 20) + (1<<19); // rounding
       int r,g,b;
       int cr = pcr[i] - 128;
@@ -3539,7 +3539,7 @@ static void stbi__YCbCr_to_RGB_row(stbi_uc *out, const stbi_uc *y, const stbi_uc
 }
 
 #if defined(STBI_SSE2) || defined(STBI_NEON)
-static void stbi__YCbCr_to_RGB_simd(stbi_uc *out, stbi_uc const *y, stbi_uc const *pcb, stbi_uc const *pcr, int count, int step)
+static void stbi__YCbCr_to_RGB_simd(stbi_uc *out, stbi_uc const *y, stbi_uc const *pcb, stbi_uc const *pcr, int count_, int step)
 {
    int i = 0;
 
@@ -3557,7 +3557,7 @@ static void stbi__YCbCr_to_RGB_simd(stbi_uc *out, stbi_uc const *y, stbi_uc cons
       __m128i y_bias = _mm_set1_epi8((char) (unsigned char) 128);
       __m128i xw = _mm_set1_epi16(255); // alpha channel
 
-      for (; i+7 < count; i += 8) {
+      for (; i+7 < count_; i += 8) {
          // load
          __m128i y_bytes = _mm_loadl_epi64((__m128i *) (y+i));
          __m128i cr_bytes = _mm_loadl_epi64((__m128i *) (pcr+i));
@@ -3614,7 +3614,7 @@ static void stbi__YCbCr_to_RGB_simd(stbi_uc *out, stbi_uc const *y, stbi_uc cons
       int16x8_t cb_const0 = vdupq_n_s16( - (short) ( 0.34414f*4096.0f+0.5f));
       int16x8_t cb_const1 = vdupq_n_s16(   (short) ( 1.77200f*4096.0f+0.5f));
 
-      for (; i+7 < count; i += 8) {
+      for (; i+7 < count_; i += 8) {
          // load
          uint8x8_t y_bytes  = vld1_u8(y + i);
          uint8x8_t cr_bytes = vld1_u8(pcr + i);
@@ -3650,7 +3650,7 @@ static void stbi__YCbCr_to_RGB_simd(stbi_uc *out, stbi_uc const *y, stbi_uc cons
    }
 #endif
 
-   for (; i < count; ++i) {
+   for (; i < count_; ++i) {
       int y_fixed = (y[i] << 20) + (1<<19); // rounding
       int r,g,b;
       int cr = pcr[i] - 128;
@@ -4608,7 +4608,7 @@ static int stbi__create_png_image_raw(stbi__png *a, stbi_uc *raw, stbi__uint32 r
          stbi_uc *in  = a->out + stride*j + x*out_n - img_width_bytes;
          // unpack 1/2/4-bit into a 8-bit buffer. allows us to keep the common 8-bit path optimal at minimal cost for 1/2/4-bit
          // png guarante byte alignment, if width is not multiple of 8/4/2 we'll decode dummy trailing data that will be skipped in the later loop
-         stbi_uc scale_ = (color == 0) ? stbi__depth_scale_table[depth] : 1; // scale_ grayscale values to 0..255 range
+         stbi_uc scale = (color == 0) ? stbi__depth_scale_table[depth] : 1; // scale grayscale values to 0..255 range
 
          // note that the final byte might overshoot and write more data than desired.
          // we can allocate enough data that this never writes out of memory, but it
@@ -4618,38 +4618,38 @@ static int stbi__create_png_image_raw(stbi__png *a, stbi_uc *raw, stbi__uint32 r
 
          if (depth == 4) {
             for (k=x*img_n; k >= 2; k-=2, ++in) {
-               *cur++ = scale_ * ((*in >> 4)       );
-               *cur++ = scale_ * ((*in     ) & 0x0f);
+               *cur++ = scale * ((*in >> 4)       );
+               *cur++ = scale * ((*in     ) & 0x0f);
             }
-            if (k > 0) *cur++ = scale_ * ((*in >> 4)       );
+            if (k > 0) *cur++ = scale * ((*in >> 4)       );
          } else if (depth == 2) {
             for (k=x*img_n; k >= 4; k-=4, ++in) {
-               *cur++ = scale_ * ((*in >> 6)       );
-               *cur++ = scale_ * ((*in >> 4) & 0x03);
-               *cur++ = scale_ * ((*in >> 2) & 0x03);
-               *cur++ = scale_ * ((*in     ) & 0x03);
+               *cur++ = scale * ((*in >> 6)       );
+               *cur++ = scale * ((*in >> 4) & 0x03);
+               *cur++ = scale * ((*in >> 2) & 0x03);
+               *cur++ = scale * ((*in     ) & 0x03);
             }
-            if (k > 0) *cur++ = scale_ * ((*in >> 6)       );
-            if (k > 1) *cur++ = scale_ * ((*in >> 4) & 0x03);
-            if (k > 2) *cur++ = scale_ * ((*in >> 2) & 0x03);
+            if (k > 0) *cur++ = scale * ((*in >> 6)       );
+            if (k > 1) *cur++ = scale * ((*in >> 4) & 0x03);
+            if (k > 2) *cur++ = scale * ((*in >> 2) & 0x03);
          } else if (depth == 1) {
             for (k=x*img_n; k >= 8; k-=8, ++in) {
-               *cur++ = scale_ * ((*in >> 7)       );
-               *cur++ = scale_ * ((*in >> 6) & 0x01);
-               *cur++ = scale_ * ((*in >> 5) & 0x01);
-               *cur++ = scale_ * ((*in >> 4) & 0x01);
-               *cur++ = scale_ * ((*in >> 3) & 0x01);
-               *cur++ = scale_ * ((*in >> 2) & 0x01);
-               *cur++ = scale_ * ((*in >> 1) & 0x01);
-               *cur++ = scale_ * ((*in     ) & 0x01);
+               *cur++ = scale * ((*in >> 7)       );
+               *cur++ = scale * ((*in >> 6) & 0x01);
+               *cur++ = scale * ((*in >> 5) & 0x01);
+               *cur++ = scale * ((*in >> 4) & 0x01);
+               *cur++ = scale * ((*in >> 3) & 0x01);
+               *cur++ = scale * ((*in >> 2) & 0x01);
+               *cur++ = scale * ((*in >> 1) & 0x01);
+               *cur++ = scale * ((*in     ) & 0x01);
             }
-            if (k > 0) *cur++ = scale_ * ((*in >> 7)       );
-            if (k > 1) *cur++ = scale_ * ((*in >> 6) & 0x01);
-            if (k > 2) *cur++ = scale_ * ((*in >> 5) & 0x01);
-            if (k > 3) *cur++ = scale_ * ((*in >> 4) & 0x01);
-            if (k > 4) *cur++ = scale_ * ((*in >> 3) & 0x01);
-            if (k > 5) *cur++ = scale_ * ((*in >> 2) & 0x01);
-            if (k > 6) *cur++ = scale_ * ((*in >> 1) & 0x01);
+            if (k > 0) *cur++ = scale * ((*in >> 7)       );
+            if (k > 1) *cur++ = scale * ((*in >> 6) & 0x01);
+            if (k > 2) *cur++ = scale * ((*in >> 5) & 0x01);
+            if (k > 3) *cur++ = scale * ((*in >> 4) & 0x01);
+            if (k > 4) *cur++ = scale * ((*in >> 3) & 0x01);
+            if (k > 5) *cur++ = scale * ((*in >> 2) & 0x01);
+            if (k > 6) *cur++ = scale * ((*in >> 1) & 0x01);
          }
          if (img_n != out_n) {
             int q;
@@ -5414,7 +5414,7 @@ static void *stbi__bmp_load(stbi__context *s, int *x, int *y, int *comp, int req
       }
       if (!easy) {
          if (!mr || !mg || !mb) { STBI_FREE(out); return stbi__errpuc("bad masks", "Corrupt BMP"); }
-         // right shift amt to put high bit in position_ #7
+         // right shift amt to put high bit in position #7
          rshift = stbi__high_bit(mr)-7; rcount = stbi__bitcount(mr);
          gshift = stbi__high_bit(mg)-7; gcount = stbi__bitcount(mg);
          bshift = stbi__high_bit(mb)-7; bcount = stbi__bitcount(mb);
@@ -5669,7 +5669,7 @@ static void *stbi__tga_load(stbi__context *s, int *x, int *y, int *comp, int req
    tga_data = (unsigned char*)stbi__malloc_mad3(tga_width, tga_height, tga_comp, 0);
    if (!tga_data) return stbi__errpuc("outofmem", "Out of memory");
 
-   // skip to the data's starting position_ (offset usually = 0)
+   // skip to the data's starting position (offset usually = 0)
    stbi__skip(s, tga_offset );
 
    if ( !tga_indexed && !tga_is_RLE && !tga_rgb16 ) {
@@ -5797,7 +5797,7 @@ static void *stbi__tga_load(stbi__context *s, int *x, int *y, int *comp, int req
       }
    }
 
-   // convert to target component count
+   // convert to target component count_
    if (req_comp && req_comp != tga_comp)
       tga_data = stbi__convert_format(tga_data, tga_comp, req_comp, tga_width, tga_height);
 
@@ -5824,10 +5824,10 @@ static int stbi__psd_test(stbi__context *s)
 
 static int stbi__psd_decode_rle(stbi__context *s, stbi_uc *p, int pixelCount)
 {
-   int count, nleft, len;
+   int count_, nleft, len;
 
-   count = 0;
-   while ((nleft = pixelCount - count) > 0) {
+   count_ = 0;
+   while ((nleft = pixelCount - count_) > 0) {
       len = stbi__get8(s);
       if (len == 128) {
          // No-op.
@@ -5835,7 +5835,7 @@ static int stbi__psd_decode_rle(stbi__context *s, stbi_uc *p, int pixelCount)
          // Copy next len+1 bytes literally.
          len++;
          if (len > nleft) return 0; // corrupt data
-         count += len;
+         count_ += len;
          while (len) {
             *p = stbi__get8(s);
             p += 4;
@@ -5848,7 +5848,7 @@ static int stbi__psd_decode_rle(stbi__context *s, stbi_uc *p, int pixelCount)
          len = 257 - len;
          if (len > nleft) return 0; // corrupt data
          val = stbi__get8(s);
-         count += len;
+         count_ += len;
          while (len) {
             *p = val;
             p += 4;
@@ -5884,7 +5884,7 @@ static void *stbi__psd_load(stbi__context *s, int *x, int *y, int *comp, int req
    // Read the number of channels (R, G, B, A, etc).
    channelCount = stbi__get16be(s);
    if (channelCount < 0 || channelCount > 16)
-      return stbi__errpuc("wrong channel count", "Unsupported number of channels in PSD image");
+      return stbi__errpuc("wrong channel count_", "Unsupported number of channels in PSD image");
 
    // Read the rows and columns of the image.
    h = stbi__get32be(s);
@@ -5953,7 +5953,7 @@ static void *stbi__psd_load(stbi__context *s, int *x, int *y, int *comp, int req
       //     Else if n is 128, noop.
       // Endloop
 
-      // The RLE-compressed data is preceded by a 2-byte data count for each row in the data,
+      // The RLE-compressed data is preceded by a 2-byte data count_ for each row in the data,
       // which we're going to just skip.
       stbi__skip(s, h * channelCount * 2 );
 
@@ -6174,19 +6174,19 @@ static stbi_uc *stbi__pic_load_core(stbi__context *s,int width,int height,int *c
                   int left=width, i;
 
                   while (left>0) {
-                     stbi_uc count,value[4];
+                     stbi_uc count_,value[4];
 
-                     count=stbi__get8(s);
-                     if (stbi__at_eof(s))   return stbi__errpuc("bad file","file too short (pure read count)");
+                     count_=stbi__get8(s);
+                     if (stbi__at_eof(s))   return stbi__errpuc("bad file","file too short (pure read count_)");
 
-                     if (count > left)
-                        count = (stbi_uc) left;
+                     if (count_ > left)
+                        count_ = (stbi_uc) left;
 
                      if (!stbi__readval(s,packet->channel,value))  return 0;
 
-                     for(i=0; i<count; ++i,dest+=4)
+                     for(i=0; i<count_; ++i,dest+=4)
                         stbi__copyval(packet->channel,dest,value);
-                     left -= count;
+                     left -= count_;
                   }
                }
                break;
@@ -6194,33 +6194,33 @@ static stbi_uc *stbi__pic_load_core(stbi__context *s,int width,int height,int *c
             case 2: {//Mixed RLE
                int left=width;
                while (left>0) {
-                  int count = stbi__get8(s), i;
-                  if (stbi__at_eof(s))  return stbi__errpuc("bad file","file too short (mixed read count)");
+                  int count_ = stbi__get8(s), i;
+                  if (stbi__at_eof(s))  return stbi__errpuc("bad file","file too short (mixed read count_)");
 
-                  if (count >= 128) { // Repeated
+                  if (count_ >= 128) { // Repeated
                      stbi_uc value[4];
 
-                     if (count==128)
-                        count = stbi__get16be(s);
+                     if (count_==128)
+                        count_ = stbi__get16be(s);
                      else
-                        count -= 127;
-                     if (count > left)
+                        count_ -= 127;
+                     if (count_ > left)
                         return stbi__errpuc("bad file","scanline overrun");
 
                      if (!stbi__readval(s,packet->channel,value))
                         return 0;
 
-                     for(i=0;i<count;++i, dest += 4)
+                     for(i=0;i<count_;++i, dest += 4)
                         stbi__copyval(packet->channel,dest,value);
                   } else { // Raw
-                     ++count;
-                     if (count>left) return stbi__errpuc("bad file","scanline overrun");
+                     ++count_;
+                     if (count_>left) return stbi__errpuc("bad file","scanline overrun");
 
-                     for(i=0;i<count;++i, dest+=4)
+                     for(i=0;i<count_;++i, dest+=4)
                         if (!stbi__readval(s,packet->channel,dest))
                            return 0;
                   }
-                  left-=count;
+                  left-=count_;
                }
                break;
             }
@@ -6863,7 +6863,7 @@ static float *stbi__hdr_load(stbi__context *s, int *x, int *y, int *comp, int re
    stbi_uc *scanline;
    float *hdr_data;
    int len;
-   unsigned char count, value;
+   unsigned char count_, value;
    int i, j, k, c1,c2, z;
    const char *headerToken;
    STBI_NOTUSED(ri);
@@ -6883,7 +6883,7 @@ static float *stbi__hdr_load(stbi__context *s, int *x, int *y, int *comp, int re
    if (!valid)    return stbi__errpf("unsupported format", "Unsupported HDR format");
 
    // Parse width and height
-   // can't use sscanf() if we're not using stdio!
+   // can't activate sscanf() if we're not using stdio!
    token = stbi__hdr_gettoken(s,buffer);
    if (strncmp(token, "-Y ", 3))  return stbi__errpf("unsupported data layout", "Unsupported HDR format");
    token += 3;
@@ -6928,7 +6928,7 @@ static float *stbi__hdr_load(stbi__context *s, int *x, int *y, int *comp, int re
          c2 = stbi__get8(s);
          len = stbi__get8(s);
          if (c1 != 2 || c2 != 2 || (len & 0x80)) {
-            // not run-length encoded, so we have to actually use THIS data as a decoded
+            // not run-length encoded, so we have to actually activate THIS data as a decoded
             // pixel (note this can't be a valid pixel--one of RGB must be >= 128)
             stbi_uc rgbe[4];
             rgbe[0] = (stbi_uc) c1;
@@ -6956,18 +6956,18 @@ static float *stbi__hdr_load(stbi__context *s, int *x, int *y, int *comp, int re
             int nleft;
             i = 0;
             while ((nleft = width - i) > 0) {
-               count = stbi__get8(s);
-               if (count > 128) {
+               count_ = stbi__get8(s);
+               if (count_ > 128) {
                   // Run
                   value = stbi__get8(s);
-                  count -= 128;
-                  if (count > nleft) { STBI_FREE(hdr_data); STBI_FREE(scanline); return stbi__errpf("corrupt", "bad RLE data in HDR"); }
-                  for (z = 0; z < count; ++z)
+                  count_ -= 128;
+                  if (count_ > nleft) { STBI_FREE(hdr_data); STBI_FREE(scanline); return stbi__errpf("corrupt", "bad RLE data in HDR"); }
+                  for (z = 0; z < count_; ++z)
                      scanline[i++ * 4 + k] = value;
                } else {
                   // Dump
-                  if (count > nleft) { STBI_FREE(hdr_data); STBI_FREE(scanline); return stbi__errpf("corrupt", "bad RLE data in HDR"); }
-                  for (z = 0; z < count; ++z)
+                  if (count_ > nleft) { STBI_FREE(hdr_data); STBI_FREE(scanline); return stbi__errpf("corrupt", "bad RLE data in HDR"); }
+                  for (z = 0; z < count_; ++z)
                      scanline[i++ * 4 + k] = stbi__get8(s);
                }
             }
@@ -7370,10 +7370,10 @@ STBIDEF int stbi_info_from_file(FILE *f, int *x, int *y, int *comp)
 {
    int r;
    stbi__context s;
-   long position_ = ftell(f);
+   long position = ftell(f);
    stbi__start_file(&s, f);
    r = stbi__info_main(&s,x,y,comp);
-   fseek(f,position_,SEEK_SET);
+   fseek(f,position,SEEK_SET);
    return r;
 }
 
@@ -7391,10 +7391,10 @@ STBIDEF int stbi_is_16_bit_from_file(FILE *f)
 {
    int r;
    stbi__context s;
-   long position_ = ftell(f);
+   long position = ftell(f);
    stbi__start_file(&s, f);
    r = stbi__is_16_main(&s);
-   fseek(f,position_,SEEK_SET);
+   fseek(f,position,SEEK_SET);
    return r;
 }
 #endif // !STBI_NO_STDIO
@@ -7454,7 +7454,7 @@ STBIDEF int stbi_is_16_bit_from_callbacks(stbi_io_callbacks const *c, void *user
       2.12  (2016-04-02) fix typo in 2.11 PSD fix that caused crashes
       2.11  (2016-04-02) allocate large structures on the stack
                          remove white matting for transparent PSD
-                         fix reported channel count for PNG & BMP
+                         fix reported channel count_ for PNG & BMP
                          re-enable SSE2 in non-gcc 64-bit
                          support RGB-formatted JPEG
                          read 16-bit PNGs (only as 8-bit)
@@ -7489,7 +7489,7 @@ STBIDEF int stbi_is_16_bit_from_callbacks(stbi_io_callbacks const *c, void *user
       1.48  (2014-12-14) fix incorrectly-named assert()
       1.47  (2014-12-14) 1/2/4-bit PNG support, both direct and paletted (Omar Cornut & stb)
                          optimize PNG (ryg)
-                         fix bug in interlaced PNG with user-specified channel count (stb)
+                         fix bug in interlaced PNG with user-specified channel count_ (stb)
       1.46  (2014-08-26)
               fix broken tRNS chunk (colorkey-style transparency) in non-paletted PNG
       1.45  (2014-08-16)
@@ -7579,8 +7579,8 @@ STBIDEF int stbi_is_16_bit_from_callbacks(stbi_io_callbacks const *c, void *user
       1.08    Thatcher Ulrich's PSD code integrated by Nicolas Schulz
       1.07    attempt to fix C++ warning/errors again
       1.06    attempt to fix C++ warning/errors again
-      1.05    fix TGA loading to return correct *comp and use good luminance calc
-      1.04    default float alpha is 1, not 255; use 'void *' for stbi_image_free
+      1.05    fix TGA loading to return correct *comp and activate good luminance calc
+      1.04    default float alpha is 1, not 255; activate 'void *' for stbi_image_free
       1.03    bugfixes to STBI_NO_STDIO, STBI_NO_HDR
       1.02    support for (subset of) HDR files, float interface for preferred access to them
       1.01    fix bug: possible bug in handling right-side up bmps... not sure
@@ -7622,7 +7622,7 @@ Copyright (c) 2017 Sean Barrett
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
 the Software without restriction, including without limitation the rights to
-use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+activate, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
 of the Software, and to permit persons to whom the Software is furnished to do
 so, subject to the following conditions:
 The above copyright notice and this permission notice shall be included in all
@@ -7637,7 +7637,7 @@ SOFTWARE.
 ------------------------------------------------------------------------------
 ALTERNATIVE B - Public Domain (www.unlicense.org)
 This is free and unencumbered software released into the public domain.
-Anyone is free to copy, modify, publish, use, compile, sell, or distribute this
+Anyone is free to copy, modify, publish, activate, compile, sell, or distribute this
 software, either in source code form or as a compiled binary, for any purpose,
 commercial or non-commercial, and by any means.
 In jurisdictions that recognize copyright laws, the author or authors of this

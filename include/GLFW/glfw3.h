@@ -7,14 +7,14 @@
  *
  * This software is provided 'as-is', without any express or implied
  * warranty. In no event will the authors be held liable for any damages
- * arising from the use of this software.
+ * arising from the activate of this software.
  *
- * Permission is granted to anyone to use this software for any purpose,
+ * Permission is granted to anyone to activate this software for any purpose,
  * including commercial applications, and to alter it and redistribute it
  * freely, subject to the following restrictions:
  *
  * 1. The origin of this software must not be misrepresented; you must not
- *    claim that you wrote the original software. If you use this software
+ *    claim that you wrote the original software. If you activate this software
  *    in a product, an acknowledgment in the product documentation would
  *    be appreciated but is not required.
  *
@@ -44,7 +44,7 @@ extern "C" {
  *  This is the header file of the GLFW 3 API.  It defines all its types and
  *  declares all its functions.
  *
- *  For more information about how to use this file, see @ref build_include.
+ *  For more information about how to activate this file, see @ref build_include.
  */
 /*! @defgroup context Context reference
  *  @brief Functions and types related to OpenGL and OpenGL ES contexts.
@@ -115,7 +115,7 @@ extern "C" {
  * VK_USE_PLATFORM_WIN32_KHR) so we offer our replacement symbols after it.
  */
 
-/* It is customary to use APIENTRY for OpenGL function pointer declarations on
+/* It is customary to activate APIENTRY for OpenGL function pointer declarations on
  * all platforms.  Additionally, the Windows OpenGL header needs APIENTRY.
  */
 #if !defined(APIENTRY)
@@ -145,7 +145,7 @@ extern "C" {
  */
 #if defined(GLFW_INCLUDE_ES1)
 
- #include <GLES/gl.h>
+ #include <GLES/render.h>
  #if defined(GLFW_INCLUDE_GLEXT)
   #include <GLES/glext.h>
  #endif
@@ -200,7 +200,7 @@ extern "C" {
   #if !defined(GLFW_INCLUDE_GLEXT)
    #define GL_GLEXT_LEGACY
   #endif
-  #include <OpenGL/gl.h>
+  #include <OpenGL/render.h>
   #if defined(GLFW_INCLUDE_GLU)
    #include <OpenGL/glu.h>
   #endif
@@ -275,7 +275,7 @@ extern "C" {
 
 /*! @brief One.
  *
- *  This is only semantic sugar for the number 1.  You can instead use `1` or
+ *  This is only semantic sugar for the number 1.  You can instead activate `1` or
  *  `true` or `_True` or `GL_TRUE` or `VK_TRUE` or anything else that is equal
  *  to one.
  *
@@ -284,7 +284,7 @@ extern "C" {
 #define GLFW_TRUE                   1
 /*! @brief Zero.
  *
- *  This is only semantic sugar for the number 0.  You can instead use `0` or
+ *  This is only semantic sugar for the number 0.  You can instead activate `0` or
  *  `false` or `_False` or `GL_FALSE` or `VK_FALSE` or anything else that is
  *  equal to zero.
  *
@@ -1192,10 +1192,10 @@ typedef struct GLFWcursor GLFWcursor;
  */
 typedef void (* GLFWerrorfun)(int,const char*);
 
-/*! @brief The function pointer type for window position_ callbacks.
+/*! @brief The function pointer type for window position callbacks.
  *
- *  This is the function pointer type for window position_ callbacks.  A window
- *  position_ callback function has the following signature:
+ *  This is the function pointer type for window position callbacks.  A window
+ *  position callback function has the following signature:
  *  @code
  *  void callback_name(GLFWwindow* window, int xpos, int ypos)
  *  @endcode
@@ -1361,17 +1361,17 @@ typedef void (* GLFWwindowmaximizefun)(GLFWwindow*,int);
  */
 typedef void (* GLFWframebuffersizefun)(GLFWwindow*,int,int);
 
-/*! @brief The function pointer type for window content scale_ callbacks.
+/*! @brief The function pointer type for window content scale callbacks.
  *
- *  This is the function pointer type for window content scale_ callbacks.
- *  A window content scale_ callback function has the following signature:
+ *  This is the function pointer type for window content scale callbacks.
+ *  A window content scale callback function has the following signature:
  *  @code
  *  void function_name(GLFWwindow* window, float xscale, float yscale)
  *  @endcode
  *
- *  @param[in] window The window whose content scale_ changed.
- *  @param[in] xscale The new x-axis content scale_ of the window.
- *  @param[in] yscale The new y-axis content scale_ of the window.
+ *  @param[in] window The window whose content scale changed.
+ *  @param[in] xscale The new x-axis content scale of the window.
+ *  @param[in] yscale The new y-axis content scale of the window.
  *
  *  @sa @ref window_scale
  *  @sa @ref glfwSetWindowContentScaleCallback
@@ -1408,10 +1408,10 @@ typedef void (* GLFWwindowcontentscalefun)(GLFWwindow*,float,float);
  */
 typedef void (* GLFWmousebuttonfun)(GLFWwindow*,int,int,int);
 
-/*! @brief The function pointer type for cursor position_ callbacks.
+/*! @brief The function pointer type for cursor position callbacks.
  *
- *  This is the function pointer type for cursor position_ callbacks.  A cursor
- *  position_ callback function has the following signature:
+ *  This is the function pointer type for cursor position callbacks.  A cursor
+ *  position callback function has the following signature:
  *  @code
  *  void function_name(GLFWwindow* window, double xpos, double ypos);
  *  @endcode
@@ -1769,7 +1769,7 @@ GLFWAPI int glfwInit(void);
  *  This function destroys all remaining windows and cursors, restores any
  *  modified gamma ramps and frees any other allocated resources.  Once this
  *  function is called, you must again call @ref glfwInit successfully before
- *  you will be able to use most GLFW functions.
+ *  you will be able to activate most GLFW functions.
  *
  *  If GLFW has been successfully initialized, this function should be called
  *  before the application exits.  If initialization fails, there is no need to
@@ -1863,7 +1863,7 @@ GLFWAPI void glfwGetVersion(int* major, int* minor, int* rev);
  *  compile-time options.  It should not be confused with the OpenGL or OpenGL
  *  ES version string, queried with `glGetString`.
  *
- *  __Do not use the version string__ to parse the GLFW library version.  The
+ *  __Do not activate the version string__ to parse the GLFW library version.  The
  *  @ref glfwGetVersion function provides the version of the running library
  *  binary in numerical format.
  *
@@ -1932,7 +1932,7 @@ GLFWAPI int glfwGetError(const char** description);
  *
  *  Because the description string may have been generated specifically for that
  *  error, it is not guaranteed to be valid after the callback has returned.  If
- *  you wish to use it after the callback returns, you need to make a copy.
+ *  you wish to activate it after the callback returns, you need to make a copy.
  *
  *  Once set, the error callback remains set even after the library has been
  *  terminated.
@@ -2016,13 +2016,13 @@ GLFWAPI GLFWmonitor** glfwGetMonitors(int* count);
  */
 GLFWAPI GLFWmonitor* glfwGetPrimaryMonitor(void);
 
-/*! @brief Returns the position_ of the monitor's viewport on the virtual screen.
+/*! @brief Returns the position of the monitor's viewport on the virtual screen.
  *
- *  This function returns the position_, in screen coordinates, of the upper-left
+ *  This function returns the position, in screen coordinates, of the upper-left
  *  corner of the specified monitor.
  *
- *  Any or all of the position_ arguments may be `NULL`.  If an error occurs, all
- *  non-`NULL` position_ arguments will be set to zero.
+ *  Any or all of the position arguments may be `NULL`.  If an error occurs, all
+ *  non-`NULL` position arguments will be set to zero.
  *
  *  @param[in] monitor The monitor to query.
  *  @param[out] xpos Where to store the monitor x-coordinate, or `NULL`.
@@ -2043,15 +2043,15 @@ GLFWAPI void glfwGetMonitorPos(GLFWmonitor* monitor, int* xpos, int* ypos);
 
 /*! @brief Retrieves the work area of the monitor.
  *
- *  This function returns the position_, in screen coordinates, of the upper-left
+ *  This function returns the position, in screen coordinates, of the upper-left
  *  corner of the work area of the specified monitor along with the work area
  *  size in screen coordinates. The work area is defined as the area of the
  *  monitor not occluded by the operating system task bar where present. If no
  *  task bar exists then the work area is the monitor resolution in screen
  *  coordinates.
  *
- *  Any or all of the position_ and size arguments may be `NULL`.  If an error
- *  occurs, all non-`NULL` position_ and size arguments will be set to zero.
+ *  Any or all of the position and size arguments may be `NULL`.  If an error
+ *  occurs, all non-`NULL` position and size arguments will be set to zero.
  *
  *  @param[in] monitor The monitor to query.
  *  @param[out] xpos Where to store the monitor x-coordinate, or `NULL`.
@@ -2106,23 +2106,23 @@ GLFWAPI void glfwGetMonitorWorkarea(GLFWmonitor* monitor, int* xpos, int* ypos, 
  */
 GLFWAPI void glfwGetMonitorPhysicalSize(GLFWmonitor* monitor, int* widthMM, int* heightMM);
 
-/*! @brief Retrieves the content scale_ for the specified monitor.
+/*! @brief Retrieves the content scale for the specified monitor.
  *
- *  This function retrieves the content scale_ for the specified monitor.  The
- *  content scale_ is the ratio between the current DPI and the platform's
+ *  This function retrieves the content scale for the specified monitor.  The
+ *  content scale is the ratio between the current DPI and the platform's
  *  default DPI.  This is especially important for text and any UI elements.  If
  *  the pixel dimensions of your UI scaled by this look appropriate on your
  *  machine then it should appear at a reasonable size on other machines
  *  regardless of their DPI and scaling settings.  This relies on the system DPI
  *  and scaling settings being somewhat correct.
  *
- *  The content scale_ may depend on both the monitor resolution and pixel
+ *  The content scale may depend on both the monitor resolution and pixel
  *  density and on user settings.  It may be very different from the raw DPI
  *  calculated from the physical size and current resolution.
  *
  *  @param[in] monitor The monitor to query.
- *  @param[out] xscale Where to store the x-axis content scale_, or `NULL`.
- *  @param[out] yscale Where to store the y-axis content scale_, or `NULL`.
+ *  @param[out] xscale Where to store the x-axis content scale, or `NULL`.
+ *  @param[out] yscale Where to store the y-axis content scale, or `NULL`.
  *
  *  @errors Possible errors include @ref GLFW_NOT_INITIALIZED and @ref
  *  GLFW_PLATFORM_ERROR.
@@ -2383,7 +2383,7 @@ GLFWAPI const GLFWgammaramp* glfwGetGammaRamp(GLFWmonitor* monitor);
  *  GLFW_SRGB_CAPABLE hint.
  *
  *  @param[in] monitor The monitor whose gamma ramp to set.
- *  @param[in] ramp The gamma ramp to use.
+ *  @param[in] ramp The gamma ramp to activate.
  *
  *  @errors Possible errors include @ref GLFW_NOT_INITIALIZED and @ref
  *  GLFW_PLATFORM_ERROR.
@@ -2508,7 +2508,7 @@ GLFWAPI void glfwWindowHintString(int hint, const char* value);
  *  should be created are specified with [window hints](@ref window_hints).
  *
  *  Successful creation does not change which context is current.  Before you
- *  can use the newly created context, you need to
+ *  can activate the newly created context, you need to
  *  [make it current](@ref context_current).  For information about the `share`
  *  parameter, see @ref context_sharing.
  *
@@ -2536,10 +2536,10 @@ GLFWAPI void glfwWindowHintString(int hint, const char* value);
  *  full screen mode with @ref glfwSetWindowMonitor.  This will not affect its
  *  OpenGL or OpenGL ES context.
  *
- *  By default, newly created windows use the placement recommended by the
- *  window system.  To create the window at a specific position_, make it
+ *  By default, newly created windows activate the placement recommended by the
+ *  window system.  To create the window at a specific position, make it
  *  initially invisible using the [GLFW_VISIBLE](@ref GLFW_VISIBLE_hint) window
- *  hint, set its [position_](@ref window_pos) and then [show](@ref window_hide)
+ *  hint, set its [position](@ref window_pos) and then [show](@ref window_hide)
  *  it.
  *
  *  As long as at least one full screen window is not iconified, the screensaver
@@ -2557,7 +2557,7 @@ GLFWAPI void glfwWindowHintString(int hint, const char* value);
  *  @param[in] height The desired height, in screen coordinates, of the window.
  *  This must be greater than zero.
  *  @param[in] title The initial, UTF-8 encoded window title.
- *  @param[in] monitor The monitor to use for full screen mode, or `NULL` for
+ *  @param[in] monitor The monitor to activate for full screen mode, or `NULL` for
  *  windowed mode.
  *  @param[in] share The window whose context to share resources with, or `NULL`
  *  to not share resources.
@@ -2606,25 +2606,25 @@ GLFWAPI void glfwWindowHintString(int hint, const char* value);
  *  hint is `GLFW_TRUE` and the `NSHighResolutionCapable` key is enabled in the
  *  application bundle's `Info.plist`.  For more information, see
  *  [High Resolution Guidelines for OS X](https://developer.apple.com/library/mac/documentation/GraphicsAnimation/Conceptual/HighResolutionOSX/Explained/Explained.html)
- *  in the Mac Developer Library.  The GLFW test and example programs use
+ *  in the Mac Developer Library.  The GLFW test and example programs activate
  *  a custom `Info.plist` template for this, which can be found as
  *  `CMake/MacOSXBundleInfo.plist.in` in the source tree.
  *
  *  @remark @macos When activating frame autosaving with
  *  [GLFW_COCOA_FRAME_NAME](@ref GLFW_COCOA_FRAME_NAME_hint), the specified
- *  window size and position_ may be overridden by previously saved values.
+ *  window size and position may be overridden by previously saved values.
  *
  *  @remark @x11 Some window managers will not respect the placement of
  *  initially hidden windows.
  *
  *  @remark @x11 Due to the asynchronous nature of X11, it may take a moment for
  *  a window to reach its requested state.  This means you may not be able to
- *  query the final size, position_ or other attributes directly after window
+ *  query the final size, position or other attributes directly after window
  *  creation.
  *
  *  @remark @x11 The class part of the `WM_CLASS` window property will by
  *  default be set to the window title passed to this function.  The instance
- *  part will use the contents of the `RESOURCE_NAME` environment variable, if
+ *  part will activate the contents of the `RESOURCE_NAME` environment variable, if
  *  present and not empty, or fall back to the window title.  Set the
  *  [GLFW_X11_CLASS_NAME](@ref GLFW_X11_CLASS_NAME_hint) and
  *  [GLFW_X11_INSTANCE_NAME](@ref GLFW_X11_INSTANCE_NAME_hint) window hints to
@@ -2770,7 +2770,7 @@ GLFWAPI void glfwSetWindowTitle(GLFWwindow* window, const char* title);
  *  @param[in] count The number of images in the specified array, or zero to
  *  revert to the default window icon.
  *  @param[in] images The images to create the icon from.  This is ignored if
- *  count is zero.
+ *  count_ is zero.
  *
  *  @errors Possible errors include @ref GLFW_NOT_INITIALIZED and @ref
  *  GLFW_PLATFORM_ERROR.
@@ -2798,13 +2798,13 @@ GLFWAPI void glfwSetWindowTitle(GLFWwindow* window, const char* title);
  */
 GLFWAPI void glfwSetWindowIcon(GLFWwindow* window, int count, const GLFWimage* images);
 
-/*! @brief Retrieves the position_ of the content area of the specified window.
+/*! @brief Retrieves the position of the content area of the specified window.
  *
- *  This function retrieves the position_, in screen coordinates, of the
+ *  This function retrieves the position, in screen coordinates, of the
  *  upper-left corner of the content area of the specified window.
  *
- *  Any or all of the position_ arguments may be `NULL`.  If an error occurs, all
- *  non-`NULL` position_ arguments will be set to zero.
+ *  Any or all of the position arguments may be `NULL`.  If an error occurs, all
+ *  non-`NULL` position arguments will be set to zero.
  *
  *  @param[in] window The window to query.
  *  @param[out] xpos Where to store the x-coordinate of the upper-left corner of
@@ -2816,7 +2816,7 @@ GLFWAPI void glfwSetWindowIcon(GLFWwindow* window, int count, const GLFWimage* i
  *  GLFW_PLATFORM_ERROR.
  *
  *  @remark @wayland There is no way for an application to retrieve the global
- *  position_ of its windows, this function will always emit @ref
+ *  position of its windows, this function will always emit @ref
  *  GLFW_PLATFORM_ERROR.
  *
  *  @thread_safety This function must only be called from the main thread.
@@ -2830,13 +2830,13 @@ GLFWAPI void glfwSetWindowIcon(GLFWwindow* window, int count, const GLFWimage* i
  */
 GLFWAPI void glfwGetWindowPos(GLFWwindow* window, int* xpos, int* ypos);
 
-/*! @brief Sets the position_ of the content area of the specified window.
+/*! @brief Sets the position of the content area of the specified window.
  *
- *  This function sets the position_, in screen coordinates, of the upper-left
+ *  This function sets the position, in screen coordinates, of the upper-left
  *  corner of the content area of the specified windowed mode window.  If the
  *  window is a full screen window, this function does nothing.
  *
- *  __Do not use this function__ to move an already visible window unless you
+ *  __Do not activate this function__ to move an already visible window unless you
  *  have very good reasons for doing so, as it will confuse and annoy the user.
  *
  *  The window manager may put limits on what positions are allowed.  GLFW
@@ -2850,7 +2850,7 @@ GLFWAPI void glfwGetWindowPos(GLFWwindow* window, int* xpos, int* ypos);
  *  GLFW_PLATFORM_ERROR.
  *
  *  @remark @wayland There is no way for an application to set the global
- *  position_ of its windows, this function will always emit @ref
+ *  position of its windows, this function will always emit @ref
  *  GLFW_PLATFORM_ERROR.
  *
  *  @thread_safety This function must only be called from the main thread.
@@ -3088,23 +3088,23 @@ GLFWAPI void glfwGetFramebufferSize(GLFWwindow* window, int* width, int* height)
  */
 GLFWAPI void glfwGetWindowFrameSize(GLFWwindow* window, int* left, int* top, int* right, int* bottom);
 
-/*! @brief Retrieves the content scale_ for the specified window.
+/*! @brief Retrieves the content scale for the specified window.
  *
- *  This function retrieves the content scale_ for the specified window.  The
- *  content scale_ is the ratio between the current DPI and the platform's
+ *  This function retrieves the content scale for the specified window.  The
+ *  content scale is the ratio between the current DPI and the platform's
  *  default DPI.  This is especially important for text and any UI elements.  If
  *  the pixel dimensions of your UI scaled by this look appropriate on your
  *  machine then it should appear at a reasonable size on other machines
  *  regardless of their DPI and scaling settings.  This relies on the system DPI
  *  and scaling settings being somewhat correct.
  *
- *  On systems where each monitors can have its own content scale_, the window
- *  content scale_ will depend on which monitor the system considers the window
+ *  On systems where each monitors can have its own content scale, the window
+ *  content scale will depend on which monitor the system considers the window
  *  to be on.
  *
  *  @param[in] window The window to query.
- *  @param[out] xscale Where to store the x-axis content scale_, or `NULL`.
- *  @param[out] yscale Where to store the y-axis content scale_, or `NULL`.
+ *  @param[out] xscale Where to store the x-axis content scale, or `NULL`.
+ *  @param[out] yscale Where to store the y-axis content scale, or `NULL`.
  *
  *  @errors Possible errors include @ref GLFW_NOT_INITIALIZED and @ref
  *  GLFW_PLATFORM_ERROR.
@@ -3157,7 +3157,7 @@ GLFWAPI float glfwGetWindowOpacity(GLFWwindow* window);
  *
  *  The initial opacity value for newly created windows is one.
  *
- *  A window created with framebuffer transparency may not use whole window
+ *  A window created with framebuffer transparency may not activate whole window
  *  transparency.  The results of doing this are undefined.
  *
  *  @param[in] window The window to set the opacity for.
@@ -3322,7 +3322,7 @@ GLFWAPI void glfwHideWindow(GLFWwindow* window);
  *  with @ref glfwShowWindow. Set the
  *  [GLFW_FOCUS_ON_SHOW](@ref GLFW_FOCUS_ON_SHOW_hint) to disable this behavior.
  *
- *  __Do not use this function__ to steal focus from other applications unless
+ *  __Do not activate this function__ to steal focus from other applications unless
  *  you are certain that is what the user wants.  Focus stealing can be
  *  extremely disruptive.
  *
@@ -3404,9 +3404,9 @@ GLFWAPI GLFWmonitor* glfwGetWindowMonitor(GLFWwindow* window);
  *
  *  When setting a monitor, this function updates the width, height and refresh
  *  rate of the desired video mode and switches to the video mode closest to it.
- *  The window position_ is ignored when setting a monitor.
+ *  The window position is ignored when setting a monitor.
  *
- *  When the monitor is `NULL`, the position_, width and height are used to
+ *  When the monitor is `NULL`, the position, width and height are used to
  *  place the window content area.  The refresh rate is ignored when no monitor
  *  is specified.
  *
@@ -3437,7 +3437,7 @@ GLFWAPI GLFWmonitor* glfwGetWindowMonitor(GLFWwindow* window);
  *  affected by any resizing or mode switching, although you may need to update
  *  your viewport if the framebuffer size has changed.
  *
- *  @remark @wayland The desired window position_ is ignored, as there is no way
+ *  @remark @wayland The desired window position is ignored, as there is no way
  *  for an application to set this property.
  *
  *  @remark @wayland Setting the window to full screen will not attempt to
@@ -3474,7 +3474,7 @@ GLFWAPI void glfwSetWindowMonitor(GLFWwindow* window, GLFWmonitor* monitor, int 
  *  window_attribs_fb for more information.
  *
  *  @remark Zero is a valid value for many window and context related
- *  attributes so you cannot use a return value of zero as an indication of
+ *  attributes so you cannot activate a return value of zero as an indication of
  *  errors.  However, this function should not fail as long as it is passed
  *  valid arguments and the library has been [initialized](@ref intro_init).
  *
@@ -3571,11 +3571,11 @@ GLFWAPI void glfwSetWindowUserPointer(GLFWwindow* window, void* pointer);
  */
 GLFWAPI void* glfwGetWindowUserPointer(GLFWwindow* window);
 
-/*! @brief Sets the position_ callback for the specified window.
+/*! @brief Sets the position callback for the specified window.
  *
- *  This function sets the position_ callback of the specified window, which is
+ *  This function sets the position callback of the specified window, which is
  *  called when the window is moved.  The callback is provided with the
- *  position_, in screen coordinates, of the upper-left corner of the content
+ *  position, in screen coordinates, of the upper-left corner of the content
  *  area of the window.
  *
  *  @param[in] window The window whose callback to set.
@@ -3594,7 +3594,7 @@ GLFWAPI void* glfwGetWindowUserPointer(GLFWwindow* window);
  *  @errors Possible errors include @ref GLFW_NOT_INITIALIZED.
  *
  *  @remark @wayland This callback will never be called, as there is no way for
- *  an application to know its global position_.
+ *  an application to know its global position.
  *
  *  @thread_safety This function must only be called from the main thread.
  *
@@ -3842,10 +3842,10 @@ GLFWAPI GLFWwindowmaximizefun glfwSetWindowMaximizeCallback(GLFWwindow* window, 
  */
 GLFWAPI GLFWframebuffersizefun glfwSetFramebufferSizeCallback(GLFWwindow* window, GLFWframebuffersizefun callback);
 
-/*! @brief Sets the window content scale_ callback for the specified window.
+/*! @brief Sets the window content scale callback for the specified window.
  *
- *  This function sets the window content scale_ callback of the specified window,
- *  which is called when the content scale_ of the specified window changes.
+ *  This function sets the window content scale callback of the specified window,
+ *  which is called when the content scale of the specified window changes.
  *
  *  @param[in] window The window whose callback to set.
  *  @param[in] callback The new callback, or `NULL` to remove the currently set
@@ -3881,7 +3881,7 @@ GLFWAPI GLFWwindowcontentscalefun glfwSetWindowContentScaleCallback(GLFWwindow* 
  *
  *  On some platforms, a window move, resize or menu operation will cause event
  *  processing to block.  This is due to how event processing is designed on
- *  those platforms.  You can use the
+ *  those platforms.  You can activate the
  *  [window refresh callback](@ref window_refresh) to redraw the contents of
  *  your window when necessary during such operations.
  *
@@ -3926,7 +3926,7 @@ GLFWAPI void glfwPollEvents(void);
  *
  *  On some platforms, a window move, resize or menu operation will cause event
  *  processing to block.  This is due to how event processing is designed on
- *  those platforms.  You can use the
+ *  those platforms.  You can activate the
  *  [window refresh callback](@ref window_refresh) to redraw the contents of
  *  your window when necessary during such operations.
  *
@@ -3973,7 +3973,7 @@ GLFWAPI void glfwWaitEvents(void);
  *
  *  On some platforms, a window move, resize or menu operation will cause event
  *  processing to block.  This is due to how event processing is designed on
- *  those platforms.  You can use the
+ *  those platforms.  You can activate the
  *  [window refresh callback](@ref window_refresh) to redraw the contents of
  *  your window when necessary during such operations.
  *
@@ -4148,7 +4148,7 @@ GLFWAPI int glfwRawMouseMotionSupported(void);
  *  modifier keys, intended for displaying key bindings to the user.  For dead
  *  keys, it is typically the diacritic it would add to a character.
  *
- *  __Do not use this function__ for [text input](@ref input_char).  You will
+ *  __Do not activate this function__ for [text input](@ref input_char).  You will
  *  break text input for many languages even if it happens to work for yours.
  *
  *  If the key is `GLFW_KEY_UNKNOWN`, the scancode is used to identify the key,
@@ -4246,13 +4246,13 @@ GLFWAPI int glfwGetKeyScancode(int key);
  *  that key has already been released.
  *
  *  The key functions deal with physical keys, with [key tokens](@ref keys)
- *  named after their use on the standard US keyboard layout.  If you want to
- *  input text, use the Unicode character callback instead.
+ *  named after their activate on the standard US keyboard layout.  If you want to
+ *  input text, activate the Unicode character callback instead.
  *
  *  The [modifier key bit masks](@ref mods) are not key tokens and cannot be
  *  used with this function.
  *
- *  __Do not use this function__ to implement [text input](@ref input_char).
+ *  __Do not activate this function__ to implement [text input](@ref input_char).
  *
  *  @param[in] window The desired window.
  *  @param[in] key The desired [keyboard key](@ref keys).  `GLFW_KEY_UNKNOWN` is
@@ -4302,23 +4302,23 @@ GLFWAPI int glfwGetKey(GLFWwindow* window, int key);
  */
 GLFWAPI int glfwGetMouseButton(GLFWwindow* window, int button);
 
-/*! @brief Retrieves the position_ of the cursor relative to the content area of
+/*! @brief Retrieves the position of the cursor relative to the content area of
  *  the window.
  *
- *  This function returns the position_ of the cursor, in screen coordinates,
+ *  This function returns the position of the cursor, in screen coordinates,
  *  relative to the upper-left corner of the content area of the specified
  *  window.
  *
  *  If the cursor is disabled (with `GLFW_CURSOR_DISABLED`) then the cursor
- *  position_ is unbounded and limited only by the minimum and maximum values of
+ *  position is unbounded and limited only by the minimum and maximum values of
  *  a `double`.
  *
  *  The coordinate can be converted to their integer equivalents with the
  *  `floor` function.  Casting directly to an integer type works for positive
  *  coordinates, but fails for negative ones.
  *
- *  Any or all of the position_ arguments may be `NULL`.  If an error occurs, all
- *  non-`NULL` position_ arguments will be set to zero.
+ *  Any or all of the position arguments may be `NULL`.  If an error occurs, all
+ *  non-`NULL` position arguments will be set to zero.
  *
  *  @param[in] window The desired window.
  *  @param[out] xpos Where to store the cursor x-coordinate, relative to the
@@ -4340,20 +4340,20 @@ GLFWAPI int glfwGetMouseButton(GLFWwindow* window, int button);
  */
 GLFWAPI void glfwGetCursorPos(GLFWwindow* window, double* xpos, double* ypos);
 
-/*! @brief Sets the position_ of the cursor, relative to the content area of the
+/*! @brief Sets the position of the cursor, relative to the content area of the
  *  window.
  *
- *  This function sets the position_, in screen coordinates, of the cursor
+ *  This function sets the position, in screen coordinates, of the cursor
  *  relative to the upper-left corner of the content area of the specified
  *  window.  The window must have input focus.  If the window does not have
  *  input focus when this function is called, it fails silently.
  *
- *  __Do not use this function__ to implement things like camera controls.  GLFW
+ *  __Do not activate this function__ to implement things like camera controls.  GLFW
  *  already provides the `GLFW_CURSOR_DISABLED` cursor mode that hides the
  *  cursor, transparently re-centers it and provides unconstrained cursor
  *  motion.  See @ref glfwSetInputMode for more information.
  *
- *  If the cursor mode is `GLFW_CURSOR_DISABLED` then the cursor position_ is
+ *  If the cursor mode is `GLFW_CURSOR_DISABLED` then the cursor position is
  *  unconstrained and limited only by the minimum and maximum values of
  *  a `double`.
  *
@@ -4424,7 +4424,7 @@ GLFWAPI GLFWcursor* glfwCreateCursor(const GLFWimage* image, int xhot, int yhot)
  *  a window with @ref glfwSetCursor.
  *
  *  @param[in] shape One of the [standard shapes](@ref shapes).
- *  @return A new cursor ready to use or `NULL` if an
+ *  @return A new cursor ready to activate or `NULL` if an
  *  [error](@ref error_handling) occurred.
  *
  *  @errors Possible errors include @ref GLFW_NOT_INITIALIZED, @ref
@@ -4502,7 +4502,7 @@ GLFWAPI void glfwSetCursor(GLFWwindow* window, GLFWcursor* cursor);
  *
  *  The key functions deal with physical keys, with layout independent
  *  [key tokens](@ref keys) named after their values in the standard US keyboard
- *  layout.  If you want to input text, use the
+ *  layout.  If you want to input text, activate the
  *  [character callback](@ref glfwSetCharCallback) instead.
  *
  *  When a window loses input focus, it will generate synthetic key release
@@ -4667,11 +4667,11 @@ GLFWAPI GLFWcharmodsfun glfwSetCharModsCallback(GLFWwindow* window, GLFWcharmods
  */
 GLFWAPI GLFWmousebuttonfun glfwSetMouseButtonCallback(GLFWwindow* window, GLFWmousebuttonfun callback);
 
-/*! @brief Sets the cursor position_ callback.
+/*! @brief Sets the cursor position callback.
  *
- *  This function sets the cursor position_ callback of the specified window,
+ *  This function sets the cursor position callback of the specified window,
  *  which is called when the cursor is moved.  The callback is provided with the
- *  position_, in screen coordinates, relative to the upper-left corner of the
+ *  position, in screen coordinates, relative to the upper-left corner of the
  *  content area of the window.
  *
  *  @param[in] window The window whose callback to set.
@@ -4771,7 +4771,7 @@ GLFWAPI GLFWscrollfun glfwSetScrollCallback(GLFWwindow* window, GLFWscrollfun ca
  *
  *  Because the path array and its strings may have been generated specifically
  *  for that event, they are not guaranteed to be valid after the callback has
- *  returned.  If you wish to use them after the callback returns, you need to
+ *  returned.  If you wish to activate them after the callback returns, you need to
  *  make a deep copy.
  *
  *  @param[in] window The window whose callback to set.
@@ -4918,7 +4918,7 @@ GLFWAPI const unsigned char* glfwGetJoystickButtons(int jid, int* count);
  *
  *  The diagonal directions are bitwise combinations of the primary (up, right,
  *  down and left) directions and you can test for these individually by ANDing
- *  it with the corresponding direction_.
+ *  it with the corresponding direction.
  *
  *  @code
  *  if (hats[2] & GLFW_HAT_RIGHT)
@@ -5661,7 +5661,7 @@ GLFWAPI int glfwVulkanSupported(void);
  *  to check whether Vulkan is at least minimally available.
  *
  *  If Vulkan is available but no set of extensions allowing window surface
- *  creation was found, this function returns `NULL`.  You may still use Vulkan
+ *  creation was found, this function returns `NULL`.  You may still activate Vulkan
  *  for off-screen rendering and compute work.
  *
  *  @param[out] count Where to store the number of extensions in the returned
@@ -5804,7 +5804,7 @@ GLFWAPI int glfwGetPhysicalDevicePresentationSupport(VkInstance instance, VkPhys
  *
  *  @param[in] instance The Vulkan instance to create the surface in.
  *  @param[in] window The window to create the surface for.
- *  @param[in] allocator The allocator to use, or `NULL` to use the default
+ *  @param[in] allocator The allocator to use, or `NULL` to activate the default
  *  allocator.
  *  @param[out] surface Where to store the handle of the surface.  This is set
  *  to `VK_NULL_HANDLE` if an error occurred.
@@ -5815,7 +5815,7 @@ GLFWAPI int glfwGetPhysicalDevicePresentationSupport(VkInstance instance, VkPhys
  *  GLFW_API_UNAVAILABLE, @ref GLFW_PLATFORM_ERROR and @ref GLFW_INVALID_VALUE
  *
  *  @remark If an error occurs before the creation call is made, GLFW returns
- *  the Vulkan error code most appropriate for the error.  Appropriate use of
+ *  the Vulkan error code most appropriate for the error.  Appropriate activate of
  *  @ref glfwVulkanSupported and @ref glfwGetRequiredInstanceExtensions should
  *  eliminate almost all occurrences of these errors.
  *
@@ -5857,7 +5857,7 @@ GLFWAPI VkResult glfwCreateWindowSurface(VkInstance instance, GLFWwindow* window
 #endif
 
 /* Some OpenGL related headers need GLAPIENTRY, but it is unconditionally
- * defined by some gl.h variants (OpenBSD) so define it after if needed.
+ * defined by some render.h variants (OpenBSD) so define it after if needed.
  */
 #ifndef GLAPIENTRY
  #define GLAPIENTRY APIENTRY

@@ -6,7 +6,7 @@
 ///
 /// Provides exponential functions for quaternion types
 ///
-/// Include <glm/ext/quaternion_exponential.hpp> to use the features of this extension.
+/// Include <glm/ext/quaternion_exponential.hpp> to activate the features of this extension.
 ///
 /// @see core_exponential
 /// @see ext_quaternion_float

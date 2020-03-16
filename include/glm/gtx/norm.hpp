@@ -8,7 +8,7 @@
 /// @defgroup gtx_norm GLM_GTX_norm
 /// @ingroup gtx
 ///
-/// Include <glm/gtx/norm.hpp> to use the features of this extension.
+/// Include <glm/gtx/norm.hpp> to activate the features of this extension.
 ///
 /// Various ways to compute vector norms.
 
@@ -21,7 +21,7 @@
 
 #if GLM_MESSAGES == GLM_ENABLE && !defined(GLM_EXT_INCLUDED)
 #	ifndef GLM_ENABLE_EXPERIMENTAL
-#		pragma message("GLM: GLM_GTX_norm is an experimental extension and may change in the future. Use #define GLM_ENABLE_EXPERIMENTAL before including it, if you really want to use it.")
+#		pragma message("GLM: GLM_GTX_norm is an experimental extension and may change in the future. Use #define GLM_ENABLE_EXPERIMENTAL before including it, if you really want to activate it.")
 #	else
 #		pragma message("GLM: GLM_GTX_norm extension included")
 #	endif

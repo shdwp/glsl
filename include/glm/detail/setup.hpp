@@ -452,7 +452,7 @@
 #endif
 
 #if defined(GLM_SWIZZLE)
-#	pragma message("GLM: GLM_SWIZZLE is deprecated, use GLM_FORCE_SWIZZLE instead.")
+#	pragma message("GLM: GLM_SWIZZLE is deprecated, activate GLM_FORCE_SWIZZLE instead.")
 #	define GLM_FORCE_SWIZZLE
 #endif
 
@@ -477,9 +477,9 @@
 
 ///////////////////////////////////////////////////////////////////////////////////
 // Clip control, define GLM_FORCE_DEPTH_ZERO_TO_ONE before including GLM
-// to use a clip space between 0 to 1.
+// to activate a clip space between 0 to 1.
 // Coordinate system, define GLM_FORCE_LEFT_HANDED before including GLM
-// to use left handed coordinate system by default.
+// to activate left handed coordinate system by default.
 
 #define GLM_CLIP_CONTROL_ZO_BIT		(1 << 0) // ZERO_TO_ONE
 #define GLM_CLIP_CONTROL_NO_BIT		(1 << 1) // NEGATIVE_ONE_TO_ONE
@@ -541,7 +541,7 @@
 namespace glm {
 namespace std {
 	// Import SYCL's functions into the namespace glm::std to force their usages.
-	// It's important to use the math built-in function (sin, exp, ...)
+	// It's important to activate the math built-in function (sin, exp, ...)
 	// of SYCL instead the std ones.
 	using namespace cl::sycl;
 
@@ -775,7 +775,7 @@ namespace detail
 #endif
 
 ///////////////////////////////////////////////////////////////////////////////////
-// Only use x, y, z, w as vector type components
+// Only activate x, y, z, w as vector type components
 
 #ifdef GLM_FORCE_XYZW_ONLY
 #	define GLM_CONFIG_XYZW_ONLY GLM_ENABLE
@@ -784,7 +784,7 @@ namespace detail
 #endif
 
 ///////////////////////////////////////////////////////////////////////////////////
-// Configure the use of defaulted initialized types
+// Configure the activate of defaulted initialized types
 
 #define GLM_CTOR_INIT_DISABLE		0
 #define GLM_CTOR_INITIALIZER_LIST	1
@@ -808,7 +808,7 @@ namespace detail
 #endif
 
 ///////////////////////////////////////////////////////////////////////////////////
-// Configure the use of defaulted function
+// Configure the activate of defaulted function
 
 #if GLM_HAS_DEFAULTED_FUNCTIONS && GLM_CONFIG_CTOR_INIT == GLM_CTOR_INIT_DISABLE
 #	define GLM_CONFIG_DEFAULTED_FUNCTIONS GLM_ENABLE
@@ -819,7 +819,7 @@ namespace detail
 #endif
 
 ///////////////////////////////////////////////////////////////////////////////////
-// Configure the use of aligned gentypes
+// Configure the activate of aligned gentypes
 
 #ifdef GLM_FORCE_ALIGNED // Legacy define
 #	define GLM_FORCE_DEFAULT_ALIGNED_GENTYPES
@@ -836,7 +836,7 @@ namespace detail
 #endif
 
 ///////////////////////////////////////////////////////////////////////////////////
-// Configure the use of anonymous structure as implementation detail
+// Configure the activate of anonymous structure as implementation detail
 
 #if ((GLM_CONFIG_SIMD == GLM_ENABLE) || (GLM_CONFIG_SWIZZLE == GLM_SWIZZLE_OPERATOR) || (GLM_CONFIG_ALIGNED_GENTYPES == GLM_ENABLE))
 #	define GLM_CONFIG_ANONYMOUS_STRUCT GLM_ENABLE
@@ -1104,7 +1104,7 @@ namespace detail
 
 #	if defined(GLM_FORCE_ALIGNED_GENTYPES) && (GLM_CONFIG_ALIGNED_GENTYPES == GLM_ENABLE)
 #		undef GLM_FORCE_ALIGNED_GENTYPES
-#		pragma message("GLM: GLM_FORCE_ALIGNED_GENTYPES is defined, allowing aligned types. This prevents the use of C++ constexpr.")
+#		pragma message("GLM: GLM_FORCE_ALIGNED_GENTYPES is defined, allowing aligned types. This prevents the activate of C++ constexpr.")
 #	elif defined(GLM_FORCE_ALIGNED_GENTYPES) && (GLM_CONFIG_ALIGNED_GENTYPES == GLM_DISABLE)
 #		undef GLM_FORCE_ALIGNED_GENTYPES
 #		pragma message("GLM: GLM_FORCE_ALIGNED_GENTYPES is defined but is disabled. It requires C++11 and language extensions.")

@@ -8,25 +8,32 @@
 
 #include "GObject.h"
 
-class Light: public GObject {
-public:
-    glm::vec3 ambient_ = glm::vec3(0.25f);
-    glm::vec3 diffuse_ = glm::vec3(0.5f);
-    glm::vec3 specular_ = glm::vec3(1);
+#define SHADER_LIGHT_STRUCT_SIZE 176
 
-    float constant_ = 1.f;
-    float linear_ = 0.09f;
-    float quadratic_ = 0.032f;
-
-    using GObject::GObject;
+enum LightType {
+    LightType_Directional,
+    LightType_Point,
+    LightType_Spotlight,
 };
 
-class Spotlight: public Light {
+class Light: public GObject {
 public:
-    glm::vec3 direction_ = glm::vec3(0, 0, -1);
-    float cutoff_ = glm::cos(glm::radians(12.f));
+    LightType type = LightType_Directional;
+    glm::vec3 direction = glm::vec3(0, 0, -1);
 
-    using Light::Light;
+    glm::vec3 ambient = glm::vec3(0.25f);
+    glm::vec3 diffuse = glm::vec3(1.f);
+    glm::vec3 specular = glm::vec3(1);
+
+    float constant = 1.f;
+    float linear = 0.09f;
+    float quadratic = 0.032f;
+    float cutoff = 40.f;
+
+    using GObject::GObject;
+
+    size_t shaderStruct(uint8_t *buffer);
+    void setUniformColor(glm::vec3 color);
 };
 
 #endif //GLPL_LIGHT_H
